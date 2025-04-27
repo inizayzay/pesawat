@@ -2,12 +2,12 @@
 ob_start();
 ?>
 <!-- Page Heading -->
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+<p class="mb-4">The Passenger page displays information about airline passengers using a third-party plugin called DataTables. DataTables helps organize and manage passenger data interactively, with features such as sorting, searching, and pagination. <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Passenger Data</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -15,21 +15,14 @@ ob_start();
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nama</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Action</th>
                     </tr>
-                </tfoot>
+                </thead>
                 <tbody>
                     <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
+                        <td>1</td>
+                        <td>Hanif</td>
                         <td><button class="btn btn-primary">
                                 <i class="fas fa-edit"></i>
                                 Edit
@@ -49,6 +42,6 @@ ob_start();
 <?php
 
 $content = ob_get_clean();
-$title = "Data Penumpang";
+$title = "Passenger Data";
 
 include "./layouts/app.php";

@@ -8,10 +8,10 @@ if (!check())
 ob_start();
 ?>
 <div class="container mt-4">
-  <form action="tambah_maskapai.php" method="post">
+  <form action="" method="post">
     <div class="form-group">
-      <label for="airlineName">Name Airline</label>
-      <input type="text" class="form-control" id="airlineName" name="airlineName" placeholder="Enter Airline Name" required>
+      <label for="airlineName">Name Terminal & gate</label>
+      <input type="text" class="form-control" id="airlineName" name="airlineName" placeholder="Enter Terminal & Gate" required>
     </div>
     <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Save</button>
   </form>
@@ -19,7 +19,7 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-$title = "Create Airline";
+$title = "Create Terminal & Gate";
 
 include "./layouts/app.php"
 ?>

@@ -17,6 +17,8 @@ ob_start();
         <h6 class="m-0 font-weight-bold text-primary">Flight Schedule Data</h6>
     </div>
     <div class="card-body">
+    <a href="tambah_flight.php" class="btn btn-primary mb-2"> <i class="fas fa-plus"></i> Add Flight</a>
+
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>

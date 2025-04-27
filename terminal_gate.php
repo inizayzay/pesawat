@@ -1,4 +1,10 @@
 <?php
+
+require "./functions/check.php";
+
+if (!check())
+  header('location: login.php');
+
 ob_start();
 ?>
 <!-- Page Heading -->

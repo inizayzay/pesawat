@@ -13,7 +13,7 @@ ob_start();
       <label for="airlineName">Name Terminal & gate</label>
       <input type="text" class="form-control" id="airlineName" name="airlineName" placeholder="Enter Terminal & Gate" required>
     </div>
-    <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Save</button>
+    <button type="submit" class="btn btn-primary" name="create"> <i class="fas fa-save"></i> Save</button>
   </form>
 </div>
 

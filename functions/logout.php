@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 function logout()
 {
     session_unset();

@@ -6,11 +6,12 @@ function store()
 {
     global $mysql;
 
-    $terminal = $_POST['terminal'];
+    $terminal = $_POST['Terminal'];
+    $gate = $_POST['Gate'];
 
-    $sql = "INSERT INTO terminal_gate (Terminal) VALUES (?)";
+    $sql = "INSERT INTO terminal_gate (Terminal,Gate) VALUES (?,?)";
     $stmt = $mysql->prepare($sql);
-    $stmt->bind_param("s", $terminal);
+    $stmt->bind_param("ss", $terminal, $gate);
 
     if ($stmt->execute()) {
         echo "Airline berhasil ditambahkan!";
@@ -28,7 +29,7 @@ function update()
     $sql = "UPDATE Airline 
     SET AirlineName = ?
     WHERE AirlineID = ?";
-    
+
     $stmt = $mysql->prepare($sql);
     $stmt->bind_param("ssi", $airlineName, $airlineID);
 

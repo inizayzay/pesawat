@@ -1,21 +1,26 @@
 <?php
 
 require "./functions/check.php";
+require "./functions/terminal_gate.php";
 
 if (!check())
   header('location: login.php');
+
+
+if (isset($_POST['create']))
+  store();
 
 ob_start();
 ?>
 <div class="container mt-4">
   <form action="" method="post">
     <div class="form-group">
-      <label for="airlineName">Name Terminal</label>
-      <input type="text" class="form-control" id="airlineName" name="airlineName" placeholder="Enter Terminal " required>
+      <label for="Terminal">Name Terminal</label>
+      <input type="text" class="form-control" id="Terminal" name="Terminal" placeholder="Enter Terminal " required>
     </div>
     <div class="form-group">
-      <label for="airlineName">Name gate</label>
-      <input type="text" class="form-control" id="airlineName" name="airlineName" placeholder="Enter Gate" required>
+      <label for="Gate">Name gate</label>
+      <input type="text" class="form-control" id="Gate" name="Gate" placeholder="Enter Gate" required>
     </div>
     <button type="submit" class="btn btn-primary" name="create"> <i class="fas fa-save"></i> Save</button>
   </form>

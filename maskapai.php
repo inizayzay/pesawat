@@ -1,6 +1,13 @@
 <?php
 
+// Ambil airline php
+require "./functions/airline.php";
+
+
 require "./functions/check.php";
+
+// Iniii
+$airlines = get();
 
 if (!check())
     header('location: login.php');
@@ -28,20 +35,25 @@ ob_start();
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>602</td>
-                        <td>Lion Air</td>
-                        <td>
-                            <button class="btn btn-primary">
-                                <i class="fas fa-edit"></i>
-                                Edit
-                            </button>
-                            <button class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Hapus
-                            </button>
-                        </td>
-                    </tr>
+                    <!-- Inii -->
+                    <?php
+                    while ($airline = $airlines->fetch_assoc()) {
+                    ?>
+                        <tr>
+                            <td><?= $airline['AirlineID']; ?></td>
+                            <td><?= $airline['AirlineName']; ?></td>
+                            <td>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

@@ -6,14 +6,14 @@ function store()
 {
     global $mysql;
 
-    $flightNumber = 'JT123';
-    $departureDate = '2025-05-10';
-    $departureAirport = 'CGK';
-    $arrivalAirport = 'DPS';
-    $departureTime = '08:00:00';
-    $boardingTime = '07:30:00';
-    $airlineID = 1;
-    $terminalGateID = 2;
+    $flightNumber = $_POST['flightNumber']; //  'JT123';
+    $departureDate =  $_POST['departureDate']; // '2025-05-10';
+    $departureAirport = $_POST['departureAirport']; //  'CGK';
+    $arrivalAirport = $_POST['arrivalAirport']; //  'DPS';
+    $departureTime =  $_POST['departureTime']; // '08:00:00';
+    $boardingTime =  $_POST['boardingTime']; // '07:30:00';
+    $airlineID = $_POST['airline'];
+    $terminalGateID = $_POST['terminal'];
 
     $sql = "INSERT INTO Flight (FlightNumber, DepartureDate, DepartureAirport, ArrivalAirport, DepartureTime, BoardingTime, AirlineID, TerminalGateID) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -38,14 +38,14 @@ function update()
 {
     global $mysql;
 
-    $flightNumber = 'JT123';
-    $departureDate = '2025-05-10';
-    $departureAirport = 'CGK';
-    $arrivalAirport = 'DPS';
-    $departureTime = '08:00:00';
-    $boardingTime = '07:30:00';
-    $airlineID = 1;
-    $terminalGateID = 2;
+    $flightNumber = $_POST['flightNumber']; //  'JT123';
+    $departureDate =  $_POST['departureDate']; // '2025-05-10';
+    $departureAirport = $_POST['departureAirport']; //  'CGK';
+    $arrivalAirport = $_POST['arrivalAirport']; //  'DPS';
+    $departureTime =  $_POST['departureTime']; // '08:00:00';
+    $boardingTime =  $_POST['boardingTime']; // '07:30:00';
+    $airlineID = $_POST['airline'];
+    $terminalGateID = $_POST['terminal'];
 
     $sql = "UPDATE Flight 
     SET FlightNumber = ?, 

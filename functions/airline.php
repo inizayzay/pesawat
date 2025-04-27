@@ -2,6 +2,17 @@
 
 require "./connections/database.php";
 
+
+// Buat fungsi get
+function get()
+{
+    global $mysql;
+
+    $stmt = $mysql->prepare("SELECT * FROM airline ORDER BY AirlineID DESC");
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
 function store()
 {
     global $mysql;
@@ -28,7 +39,7 @@ function update()
     $sql = "UPDATE Airline 
     SET AirlineName = ?
     WHERE AirlineID = ?";
-    
+
     $stmt = $mysql->prepare($sql);
     $stmt->bind_param("ssi", $airlineName, $airlineID);
 

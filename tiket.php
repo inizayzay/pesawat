@@ -10,40 +10,33 @@ ob_start();
 ?>
 <!-- Page Heading -->
 
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+<p class="mb-4">The Ticket page displays airline ticket data with the help of the DataTables plugin. DataTables enhances the table experience by offering easy-to-use sorting, searching, and pagination functionalities for better navigation and data management.<a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Ticket Data</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>ID</th>
+                        <th>Record Locator</th>
+                        <th>eTiket</th>
+                        <th>Seat Number</th>
+                        <th>Passenger</th>
+                        <th>Action</th>
                     </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                </tfoot>
+</thead>
                 <tbody>
                     <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
+                        <td>11</td>
+                        <td>WERKFP</td>
+                        <td>1234567890</td>
+                        <td>12D</td>
+                        <td>1</td>
                         <td><button class="btn btn-primary">
                                 <i class="fas fa-edit"></i>
                                 Edit
@@ -52,9 +45,6 @@ ob_start();
                                 <i class="fas fa-trash"></i>
                                 Hapus
                             </button></td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
                     </tr>
                  
                 </tbody>
@@ -66,6 +56,6 @@ ob_start();
 <?php
 
 $content = ob_get_clean();
-$title = "Data Tiket";
+$title = "Ticket Data";
 
 include "./layouts/app.php";

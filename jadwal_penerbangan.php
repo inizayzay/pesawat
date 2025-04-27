@@ -9,40 +9,36 @@ ob_start();
 ?>
 <!-- Page Heading -->
 
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+<p class="mb-4">The Flight page provides flight data information using the DataTables plugin. This tool allows users to sort, search, and browse flight details easily in a dynamic and interactive table format<a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Flight Schedule Data</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>ID</th>
+                        <th>Fligt Number</th>
+                        <th>Departure Date</th>
+                        <th>Departure Airport</th>
+                        <th>Arrival Airport</th>
+                        <th>Departure Time</th>
+                        <th>Boarding Time</th>
+                        <th>Action</th>
                     </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                </tfoot>
                 <tbody>
                     <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
+                        <td>Flight</td>
+                        <td>JT 602</td>
+                        <td>20-03-2025</td>
+                        <td>CGK</td>
+                        <td>DJB</td>
+                        <td>12:45</td>
+                        <td>12:15</td>
                         <td><button class="btn btn-primary">
                                 <i class="fas fa-edit"></i>
                                 Edit
@@ -51,9 +47,6 @@ ob_start();
                                 <i class="fas fa-trash"></i>
                                 Hapus
                             </button></td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
                     </tr>
                  
                 </tbody>
@@ -65,6 +58,6 @@ ob_start();
 <?php
 
 $content = ob_get_clean();
-$title = "Data Jadwal Penerbangan";
+$title = "Flight Schedule Data";
 
 include "./layouts/app.php";

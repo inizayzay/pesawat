@@ -3,11 +3,11 @@ $currentPath = basename($_SERVER['PHP_SELF']);
 
 $navItems = [
     ['title' => 'Dashboard', 'href' => 'index.php', 'icon' => 'fas fa-fw fa-tachometer-alt'],
-    ['title' => 'Maskapai', 'href' => 'maskapai.php', 'icon' => 'fas fa-fw fa-plane'],
-    ['title' => 'Penumpang', 'href' => 'penumpang.php', 'icon' => 'fas fa-fw fa-users'],
+    ['title' => 'Ariline', 'href' => 'maskapai.php', 'icon' => 'fas fa-fw fa-plane'],
+    ['title' => 'Passenger', 'href' => 'penumpang.php', 'icon' => 'fas fa-fw fa-users'],
     ['title' => 'Terminal & Gate', 'href' => 'terminal_gate.php', 'icon' => 'fas fa-fw fa-door-open'],
-    ['title' => 'Jadwal Penerbangan', 'href' => 'jadwal_penerbangan.php', 'icon' => 'fas fa-fw fa-calendar-alt'],
-    ['title' => 'Tiket', 'href' => 'tiket.php', 'icon' => 'fas fa-fw fa-ticket-alt'],
+    ['title' => 'Flight', 'href' => 'jadwal_penerbangan.php', 'icon' => 'fas fa-fw fa-calendar-alt'],
+    ['title' => 'Ticket', 'href' => 'tiket.php', 'icon' => 'fas fa-fw fa-ticket-alt'],
 ];
 ?>
 
@@ -16,7 +16,7 @@ $navItems = [
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">Tiket Santuy<sup></sup></div>
     </a>
     <hr class="sidebar-divider my-0">
 

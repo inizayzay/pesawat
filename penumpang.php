@@ -15,7 +15,7 @@ ob_start();
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>Nama</th>
                         <th>Action</th>
                     </tr>
                 </thead>

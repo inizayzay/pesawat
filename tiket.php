@@ -1,7 +1,7 @@
 <?php
-
+require "./functions/ticket.php";
 require "./functions/check.php";
-
+$tickets = get();
 if (!check())
   header('location: login.php');
 
@@ -24,29 +24,36 @@ ob_start();
                     <tr>
                         <th>ID</th>
                         <th>Record Locator</th>
-                        <th>eTiket</th>
+                        <th>eTicket Number</th>
                         <th>Seat Number</th>
                         <th>Passenger</th>
+                        <th>Flight ID</th>
                         <th>Action</th>
                     </tr>
 </thead>
                 <tbody>
-                    <tr>
-                        <td>11</td>
-                        <td>WERKFP</td>
-                        <td>1234567890</td>
-                        <td>12D</td>
-                        <td>1</td>
-                        <td><button class="btn btn-primary">
-                                <i class="fas fa-edit"></i>
-                                Edit
-                            </button>
-                            <button class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Hapus
-                            </button></td>
-                    </tr>
-                 
+                <?php
+                    while ($ticket = $tickets->fetch_assoc()) {
+                    ?>
+                        <tr>
+                            <td><?=$ticket['TicketID']; ?></td>
+                            <td><?= $ticket['RecordLocator']; ?></td>
+                            <td><?= $ticket['eTikcketNumber']; ?></td>
+                            <td><?=$ticket['SeatNumber']; ?></td>
+                            <td><?=$ticket['PassengerID']; ?></td>
+                            <td><?=$ticket['FlightID']; ?></td>
+                            <td>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

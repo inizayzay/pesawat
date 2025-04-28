@@ -1,6 +1,14 @@
 <?php
 
 require "./connections/database.php";
+function get()
+{
+    global $mysql;
+
+    $stmt = $mysql->prepare("SELECT * FROM flight ORDER BY FlightID DESC");
+    $stmt->execute();
+    return $stmt->get_result();
+}
 
 function store()
 {

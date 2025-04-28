@@ -1,6 +1,9 @@
 <?php
+require "./functions/flight.php";
 
 require "./functions/check.php";
+
+$Flights = get();
 
 if (!check())
   header('location: login.php');
@@ -33,23 +36,30 @@ ob_start();
                         <th>Action</th>
                     </tr>
                 <tbody>
-                    <tr>
-                        <td>Flight</td>
-                        <td>JT 602</td>
-                        <td>20-03-2025</td>
-                        <td>CGK</td>
-                        <td>DJB</td>
-                        <td>12:45</td>
-                        <td>12:15</td>
-                        <td><button class="btn btn-primary">
-                                <i class="fas fa-edit"></i>
-                                Edit
-                            </button>
-                            <button class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Hapus
-                            </button></td>
-                    </tr>
+                <?php
+                    while ($Flight = $Flights->fetch_assoc()) {
+                    ?>
+                        <tr>
+                            <td><?= $Flight['FlightID']; ?></td>
+                            <td><?= $Flight['FlightNumber']; ?></td>
+                            <td><?= $Flight['DepartureDate']; ?></td>
+                            <td><?=$Flight['DepartureAirport']; ?></td>
+                            <td><?=$Flight['ArrivalAirport']; ?></td>
+                            <td><?=$Flight['DepartureTime']; ?></td>
+                            <td><?=$Flight['BoardingTime']; ?></td>
+
+                            <td>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    <?php } ?>
                  
                 </tbody>
             </table>

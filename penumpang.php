@@ -1,6 +1,7 @@
 <?php
-
+require "./functions/passenger.php";
 require "./functions/check.php";
+$passengers = get();
 
 if (!check())
   header('location: login.php');
@@ -27,19 +28,24 @@ ob_start();
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Hanif</td>
-                        <td><button class="btn btn-primary">
-                                <i class="fas fa-edit"></i>
-                                Edit
-                            </button>
-                            <button class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Hapus
-                            </button>
-                        </td>
-                    </tr>
+                <?php
+                    while ($passenger = $passengers->fetch_assoc()) {
+                    ?>
+                        <tr>
+                            <td><?= $passenger['PassengerID']; ?></td>
+                            <td><?= $passenger['Name']; ?></td>
+                            <td>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

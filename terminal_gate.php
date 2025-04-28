@@ -1,6 +1,7 @@
 <?php
-
+require "./functions/terminal_gate.php";
 require "./functions/check.php";
+$terminal_gates = get();
 
 if (!check())
   header('location: login.php');
@@ -23,23 +24,30 @@ ob_start();
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>Terminal/Gate</th>
+            <th>Terminal</th>
+            <th>Gate</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-            <tr>
-              <td>2d/3d</td>
-              <td><button class="btn btn-primary">
-                                <i class="fas fa-edit"></i>
-                                Edit
-                            </button>
-                            <button class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Hapus
-                            </button>
-                        </td>
-            </tr>
+        <?php
+                    while ($terminal_gate = $terminal_gates->fetch_assoc()) {
+                    ?>
+                        <tr>
+                            <td><?= $terminal_gate['Terminal']; ?></td>
+                            <td><?= $terminal_gate['Gate']; ?></td>
+                            <td>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    <?php } ?>
           </tbody>
       </table>
     </div>

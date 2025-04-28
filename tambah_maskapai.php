@@ -1,7 +1,7 @@
 <?php
 
 require "./functions/check.php";
-require "./functions/airline.php";
+require "./functions/terminal_gate.php";
 
 if (!check())
   header('location: login.php');

@@ -3,10 +3,12 @@ require "./functions/flight.php";
 
 require "./functions/check.php";
 
-$Flights = get();
+use Flight as Flight;
+
+$Flights = Flight\get();
 
 if (!check())
-  header('location: login.php');
+    header('location: login.php');
 
 ob_start();
 ?>
@@ -20,7 +22,7 @@ ob_start();
         <h6 class="m-0 font-weight-bold text-primary">Flight Schedule Data</h6>
     </div>
     <div class="card-body">
-    <a href="tambah_flight.php" class="btn btn-primary mb-2"> <i class="fas fa-plus"></i> Add Flight</a>
+        <a href="tambah_flight.php" class="btn btn-primary mb-2"> <i class="fas fa-plus"></i> Add Flight</a>
 
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -36,17 +38,17 @@ ob_start();
                         <th>Action</th>
                     </tr>
                 <tbody>
-                <?php
+                    <?php
                     while ($Flight = $Flights->fetch_assoc()) {
                     ?>
                         <tr>
                             <td><?= $Flight['FlightID']; ?></td>
                             <td><?= $Flight['FlightNumber']; ?></td>
                             <td><?= $Flight['DepartureDate']; ?></td>
-                            <td><?=$Flight['DepartureAirport']; ?></td>
-                            <td><?=$Flight['ArrivalAirport']; ?></td>
-                            <td><?=$Flight['DepartureTime']; ?></td>
-                            <td><?=$Flight['BoardingTime']; ?></td>
+                            <td><?= $Flight['DepartureAirport']; ?></td>
+                            <td><?= $Flight['ArrivalAirport']; ?></td>
+                            <td><?= $Flight['DepartureTime']; ?></td>
+                            <td><?= $Flight['BoardingTime']; ?></td>
 
                             <td>
                                 <button class="btn btn-primary">
@@ -60,7 +62,7 @@ ob_start();
                             </td>
                         </tr>
                     <?php } ?>
-                 
+
                 </tbody>
             </table>
         </div>

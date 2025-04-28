@@ -1,6 +1,9 @@
 <?php
 
+namespace Flight;
+
 require "./connections/database.php";
+
 function get()
 {
     global $mysql;
@@ -39,6 +42,8 @@ function store()
         $terminalGateID
     );
 
+    $stmt->execute();
+    
     echo "Flight berhasil ditambahkan!";
 }
 

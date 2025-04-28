@@ -1,7 +1,10 @@
 <?php
 require "./functions/terminal_gate.php";
 require "./functions/check.php";
-$terminal_gates = get();
+
+use TerminalGate as Terminal;
+
+$terminal_gates = Terminal\get();
 
 if (!check())
   header('location: login.php');

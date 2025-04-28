@@ -1,5 +1,7 @@
 <?php
 
+namespace Airline;
+
 require "./connections/database.php";
 
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace TerminalGate;
+
 require "./connections/database.php";
 
 function get()

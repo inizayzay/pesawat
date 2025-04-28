@@ -26,7 +26,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?= require "./components/sidebar.php" ?>
+        <?php require "./components/sidebar.php" ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -36,7 +36,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?= require "./components/navbar.php" ?>
+                <?php require "./components/navbar.php" ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

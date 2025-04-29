@@ -106,6 +106,8 @@ button:hover {
 
 </style>
 <body>
+<form method="post" action="beli_tiket.php">
+
   <div class="background">
     <div class="card">
       <div class="promo">

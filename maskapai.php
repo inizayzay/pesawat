@@ -6,8 +6,10 @@ require "./functions/airline.php";
 
 require "./functions/check.php";
 
+use Airline as Airline;
+
 // Iniii
-$airlines = get();
+$airlines = Airline\get();
 
 if (!check())
     header('location: login.php');

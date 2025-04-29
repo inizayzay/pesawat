@@ -341,7 +341,7 @@
   /* Flight card */
   .flight-card {
     max-width: 960px;
-    margin: 24px auto 48px auto;
+    margin: auto;
     background: #fff;
     border-radius: 16px;
     padding: 16px 24px;
@@ -377,7 +377,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 30px;
     font-weight: 700;
     font-size: 20px;
     color: #222;
@@ -579,52 +579,9 @@
    </button>
   </section>
   
-  <section aria-label="Flight filters" class="filters">
-   <button aria-label="Filter" aria-pressed="false" class="filter-btn" type="button">
-    <i aria-hidden="true" class="fas fa-filter">
-    </i>
-    Filter
-    <span aria-label="1 filter applied" class="badge">
-     1
-    </span>
-   </button>
-   <button aria-label="Sort" aria-pressed="false" class="filter-btn" type="button">
-    <i aria-hidden="true" class="fas fa-sort-amount-down">
-    </i>
-    Urutkan
-    <i aria-hidden="true" class="fas fa-caret-down">
-    </i>
-   </button>
-   <button aria-label="Transit filter" aria-pressed="false" class="filter-btn" type="button">
-    <i aria-hidden="true" class="fas fa-plane">
-    </i>
-    Transit
-    <span aria-label="1 transit filter applied" class="badge">
-     1
-    </span>
-   </button>
-   <button aria-label="Maskapai filter" aria-pressed="false" class="filter-btn" type="button">
-    <i aria-hidden="true" class="fas fa-plane-arrival">
-    </i>
-    Maskapai
-    <i aria-hidden="true" class="fas fa-caret-down">
-    </i>
-   </button>
-   <button aria-label="Waktu filter" aria-pressed="false" class="filter-btn" type="button">
-    <i aria-hidden="true" class="fas fa-clock">
-    </i>
-    Waktu
-    <i aria-hidden="true" class="fas fa-caret-down">
-    </i>
-   </button>
-   <button aria-label="Penerbangan Langsung filter active" aria-pressed="true" class="filter-btn penerbangan" type="button">
-    Penerbangan Langsung
-   </button>
-  </section>
  
   <article aria-label="Flight option from Citilink, departure 18:20 from CGK, arrival 19:55 at SUB, price IDR 930.951 per passenger" class="flight-card">
    <header class="flight-header">
-    <img alt="Citilink airline logo green text on white circle background" height="36" src="https://storage.googleapis.com/a1aa/image/afa9a037-098a-46ea-e576-17bec44d3741.jpg" width="36"/>
     <div class="airline-name">
      Citilink
      <i aria-label="Baggage included" class="fas fa-suitcase-rolling">
@@ -694,7 +651,6 @@
 // Search bar clickable divs
 document.querySelectorAll('.search-bar > div[role="button"]').forEach(el => {
   el.addEventListener('click', () => {
-    alert('Clicked: ' + el.textContent.trim());
   });
   el.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -706,7 +662,6 @@ document.querySelectorAll('.search-bar > div[role="button"]').forEach(el => {
 
 // Swap origin and destination
 document.querySelector('.search-bar > div[aria-label="Swap origin and destination"]').addEventListener('click', () => {
-  alert('Swap origin and destination clicked');
 });
 document.querySelector('.search-bar > div[aria-label="Swap origin and destination"]').addEventListener('keydown', e => {
   if (e.key === 'Enter' || e.key === ' ') {
@@ -732,7 +687,6 @@ document.querySelectorAll('.date-item').forEach(item => {
 // Filter buttons clickable
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    alert('Clicked filter: ' + btn.textContent.trim());
   });
 });
 
@@ -752,6 +706,26 @@ showDetailsBtn.addEventListener('keydown', e => {
     e.preventDefault();
     showDetailsBtn.click();
   }
+});
+// Fungsi untuk menukar nilai dua elemen
+function swapValues(element1, element2) {
+  const value1 = element1.querySelector('strong').textContent;
+  const value2 = element2.querySelector('strong').textContent;
+
+  element1.querySelector('strong').textContent = value2;
+  element2.querySelector('strong').textContent = value1;
+
+  const label1 = element1.getAttribute('aria-label');
+  const label2 = element2.getAttribute('aria-label');
+  element1.setAttribute('aria-label', label2);
+  element2.setAttribute('aria-label', label1);
+}
+
+// Tambahkan event listener pada tombol swap
+document.querySelector('div[aria-label*="Swap origin and destination"]').addEventListener('click', function() {
+  const origin = document.querySelector('div[aria-label*="Origin"]');
+  const destination = document.querySelector('div[aria-label*="Destination"]');
+  swapValues(origin, destination);
 });
   </script>
  </body>

@@ -25,9 +25,9 @@ function store()
     $boardingTime =  $_POST['boardingTime']; // '07:30:00';
     $airlineID = $_POST['airline'];
     $terminalGateID = $_POST['terminal'];
-    $MaxPassanger = $_POST['airplanepassenger'];
+    $MaxPassenger = $_POST['airplanepassenger'];
 
-    $sql = "INSERT INTO Flight (FlightNumber, DepartureDate, DepartureAirport, ArrivalAirport, DepartureTime, BoardingTime, AirlineID, TerminalGateID, MaxPassanger) 
+    $sql = "INSERT INTO Flight (FlightNumber, DepartureDate, DepartureAirport, ArrivalAirport, DepartureTime, BoardingTime, AirlineID, TerminalGateID, MaxPassenger) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     $stmt = $mysql->prepare($sql);
@@ -41,7 +41,7 @@ function store()
         $boardingTime,
         $airlineID,
         $terminalGateID,
-        $MaxPassanger
+        $MaxPassenger
     );
 
     $stmt->execute();
@@ -61,7 +61,7 @@ function update()
     $boardingTime =  $_POST['boardingTime']; // '07:30:00';
     $airlineID = $_POST['airline'];
     $terminalGateID = $_POST['terminal'];
-    $MaxPassanger = $_POST['airplanepassenger'];
+    $MaxPassenger = $_POST['airplanepassenger'];
 
     $sql = "UPDATE Flight 
     SET FlightNumber = ?, 
@@ -72,7 +72,7 @@ function update()
         BoardingTime = ?, 
         AirlineID = ?, 
         TerminalGateID = ?
-        MaxPassanger = ?
+        MaxPassenger = ?
     WHERE FlightID = ?";
 
     $stmt = $mysql->prepare($sql);
@@ -86,7 +86,7 @@ function update()
         $boardingTime,
         $airlineID,
         $terminalGateID,
-        $MaxPassanger
+        $MaxPassenger
     );
 
     echo "Flight berhasil ditambahkan!";

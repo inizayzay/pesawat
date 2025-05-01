@@ -11,6 +11,11 @@ use Airline as Airline;
 // Iniii
 $airlines = Airline\get();
 
+if (isset($_GET['action']) && $_GET['action'] === 'delete') {
+    Airline\delete($_GET['id']);
+}
+
+
 if (!check())
     header('location: login.php');
 
@@ -45,14 +50,14 @@ ob_start();
                             <td><?= $airline['AirlineID']; ?></td>
                             <td><?= $airline['AirlineName']; ?></td>
                             <td>
-                                <button class="btn btn-primary">
+                                <a class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                     Edit
-                                </button>
-                                <button class="btn btn-danger">
+                                </a>
+                                <a class="btn btn-danger" href="?action=delete&id=<?= $airline['AirlineID'] ?>">
                                     <i class="fas fa-trash"></i>
                                     Hapus
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     <?php } ?>

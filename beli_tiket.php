@@ -1,13 +1,4 @@
-<?php
-require "./functions/ticket.php";
-require "./functions/check.php";
-$tickets = get();
-if (!check())
-  header('location: login.php');
 
-  
-ob_start();
-?>
 <!-- Page Heading -->
 <!DOCTYPE html>
 <html lang="id">
@@ -33,7 +24,6 @@ ob_start();
             border-radius: 8px;
             max-width: 600px;
             margin: 0 auto;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         table {
@@ -43,7 +33,6 @@ ob_start();
 
         td {
             padding: 10px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         input[type="text"], select {
@@ -99,12 +88,6 @@ ob_start();
 
 <form method="post" action="simpan.php">
     <table>
-        <tr>
-            <td>
-                <label for="kota">Cari Kota</label><br>
-                <input type="text" name="kota" id="kota" placeholder="Kota Anda" required>
-            </td>
-        </tr>
         <tr>
             <td>
                 <label for="maskapai">Filter Maskapai</label><br>
@@ -168,7 +151,3 @@ function tukarLokasi() {
 </body>
 </html>
 <?php
-$content = ob_get_clean();
-
-
-include "./layouts/app.php";

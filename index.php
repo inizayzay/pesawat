@@ -120,11 +120,23 @@ button:hover {
       <form>
         <div class="input-group">
           <label for="from">Dari</label>
-          <input type="text" id="from" value="Jakarta JKTC" readonly />
+          <select id="single" name="departureAirport" class="form-control select2-departure-airport">
+        <option></option>
+        <optgroup label="Alaskan/Hawaiian Time Zone">
+          <option value="AK">Alaska</option>
+          <option value="HI" disabled="disabled">Hawaii</option>
+        </optgroup>
+      </select>
         </div>
         <div class="input-group">
           <label for="to">Ke</label>
-          <input type="text" id="to" placeholder="Mau ke mana?" />
+          <select id="single" name="departureAirport" class="form-control select2-departure-airport">
+        <option></option>
+        <optgroup label="Alaskan/Hawaiian Time Zone">
+          <option value="AK">Alaska</option>
+          <option value="HI" disabled="disabled">Hawaii</option>
+        </optgroup>
+      </select>
         </div>
         <div class="input-group">
           <label for="departure">Pergi</label>
@@ -155,7 +167,41 @@ $content = ob_get_clean();
 ob_start();
 ?>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
+
+<script>
+  $(".select2-departure-airport, .select2-arrival-airport").select2({
+    placeholder: 'Select Airport',
+    width: '100%',
+    containerCssClass: ':all:',
+    theme: 'bootstrap',
+    ajax: {
+      url: 'api/airport.php',
+      dataType: 'json',
+      delay: 250,
+      data: function(params) {
+        return {
+          name: params.term
+        };
+      },
+      processResults: function(data) {
+        return {
+          results: data.map(function(airport) {
+            return {
+              id: airport.IataCode,
+              text: `${airport.AirportName} – ${airport.Municipality} (${airport.IataCode})`
+            };
+          })
+        };
+      },
+      cache: true
+    }
+  });
+
+
+</script>
 
 <?php 
 $script = ob_get_clean();

@@ -151,6 +151,14 @@ button:hover {
 
 <?php
 $content = ob_get_clean();
+
+ob_start();
+?>
+
+
+
+<?php 
+$script = ob_get_clean();
 $title = "Dashboard";
 
 include "./layouts/app.php"

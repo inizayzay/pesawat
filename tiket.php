@@ -1,6 +1,6 @@
 <?php
-require "./functions/ticket.php";
-require "./functions/check.php";
+require_once dirname(__FILE__) . "/functions/ticket.php";
+require_once dirname(__FILE__) . "/functions/check.php";
 $tickets = get();
 if (!check())
   header('location: login.php');

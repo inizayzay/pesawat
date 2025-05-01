@@ -26,7 +26,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require "./components/sidebar.php" ?>
+        <?php require_once dirname(__FILE__) . "/components/sidebar.php" ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -36,7 +36,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php require "./components/navbar.php" ?>
+                <?php require_once dirname(__FILE__) . "/components/navbar.php" ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -114,7 +114,7 @@
 
 <?php
 
-require "./functions/logout.php";
+require_once dirname(__FILE__) . "/functions/logout.php";
 
 if (isset($_POST['logout']))
     logout();

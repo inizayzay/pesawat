@@ -1,9 +1,9 @@
 <?php
 
-require "./functions/airline.php";
-require "./functions/terminal_gate.php";
-require "./functions/check.php";
-require "./functions/flight.php";
+require_once dirname(__FILE__) . "/functions/airline.php";
+require_once dirname(__FILE__) . "/functions/terminal_gate.php";
+require_once dirname(__FILE__) . "/functions/check.php";
+require_once dirname(__FILE__) . "/functions/flight.php";
 
 use Airline as Airline;
 use TerminalGate as Terminal;

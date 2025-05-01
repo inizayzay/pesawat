@@ -1,6 +1,6 @@
 <?php
-require "./functions/passenger.php";
-require "./functions/check.php";
+require_once dirname(__FILE__) . "/functions/passenger.php";
+require_once dirname(__FILE__) . "/functions/check.php";
 $passengers = get();
 
 if (!check())

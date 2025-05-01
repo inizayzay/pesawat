@@ -1,7 +1,7 @@
 <?php
 
-require "./functions/check.php";
-require "./functions/terminal_gate.php";
+require_once dirname(__FILE__) . "/functions/check.php";
+require_once dirname(__FILE__) . "/functions/terminal_gate.php";
 
 if (!check())
   header('location: login.php');

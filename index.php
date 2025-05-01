@@ -1,6 +1,6 @@
 <?php
 
-require "./functions/check.php";
+require_once dirname(__FILE__) . "/functions/check.php";
 
 if (!check())
   header('location: login.php');

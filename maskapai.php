@@ -1,10 +1,10 @@
 <?php
 
 // Ambil airline php
-require "./functions/airline.php";
+require_once dirname(__FILE__) . "/functions/airline.php";
 
 
-require "./functions/check.php";
+require_once dirname(__FILE__) . "/functions/check.php";
 
 use Airline as Airline;
 

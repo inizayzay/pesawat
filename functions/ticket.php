@@ -1,6 +1,6 @@
 <?php
 
-require "./connections/database.php";
+require_once dirname(__FILE__) . "/connections/database.php";
 
 
 // Buat fungsi get

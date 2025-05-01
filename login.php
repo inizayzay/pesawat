@@ -1,8 +1,8 @@
 <?php
 
-require "./connections/database.php";
-require "./functions/login.php";
-require "./functions/check.php";
+require_once dirname(__FILE__) . "/connections/database.php";
+require_once dirname(__FILE__) . "/functions/login.php";
+require_once dirname(__FILE__) . "/functions/check.php";
 
 if (isset($_POST['login']))
   login();

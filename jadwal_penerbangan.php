@@ -1,7 +1,7 @@
 <?php
-require "./functions/flight.php";
+require_once dirname(__FILE__) . "/functions/flight.php";
 
-require "./functions/check.php";
+require_once dirname(__FILE__) . "/functions/check.php";
 
 use Flight as Flight;
 

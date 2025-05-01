@@ -1,6 +1,6 @@
 <?php
-require "./functions/terminal_gate.php";
-require "./functions/check.php";
+require_once dirname(__FILE__) . "/functions/terminal_gate.php";
+require_once dirname(__FILE__) . "/functions/check.php";
 
 use TerminalGate as Terminal;
 

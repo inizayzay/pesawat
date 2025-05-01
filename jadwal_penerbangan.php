@@ -35,6 +35,7 @@ ob_start();
                         <th>Arrival Airport</th>
                         <th>Departure Time</th>
                         <th>Boarding Time</th>
+                        <th>Max Passenger</th>
                         <th>Action</th>
                     </tr>
                 <tbody>
@@ -49,6 +50,7 @@ ob_start();
                             <td><?= $Flight['ArrivalAirport']; ?></td>
                             <td><?= $Flight['DepartureTime']; ?></td>
                             <td><?= $Flight['BoardingTime']; ?></td>
+                            <td><?= $Flight['MaxPassenger']; ?></td>
 
                             <td>
                                 <button class="btn btn-primary">

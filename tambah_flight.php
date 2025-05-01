@@ -81,7 +81,12 @@ ob_start();
         <?php } ?>
       </select>
     </div>
+    <div class="form-group">
+      <label for="flightNumber">Max Passenger</label>
+      <input type="text" class="form-control" id="airplane passenger" name="airplanepassenger" placeholder="Enter passenger" required>
+    </div>
     <button type="submit" class="btn btn-primary" name="create"> <i class="fas fa-save"></i> Save</button>
+   
   </form>
 </div>
 <?php

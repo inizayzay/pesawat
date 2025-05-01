@@ -25,7 +25,7 @@ function store()
     $boardingTime =  $_POST['boardingTime']; // '07:30:00';
     $airlineID = $_POST['airline'];
     $terminalGateID = $_POST['terminal'];
-    $MaxPassanger = $_POST['MaxPassanger'];
+    $MaxPassanger = $_POST['airlinepassenger'];
 
     $sql = "INSERT INTO Flight (FlightNumber, DepartureDate, DepartureAirport, ArrivalAirport, DepartureTime, BoardingTime, AirlineID, TerminalGateID, MaxPassanger) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
@@ -61,7 +61,7 @@ function update()
     $boardingTime =  $_POST['boardingTime']; // '07:30:00';
     $airlineID = $_POST['airline'];
     $terminalGateID = $_POST['terminal'];
-    $MaxPassanger = $_POST['MaxPassanger'];
+    $MaxPassanger = $_POST['airlinepassenger'];
 
     $sql = "UPDATE Flight 
     SET FlightNumber = ?, 

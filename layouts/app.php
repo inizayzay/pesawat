@@ -26,7 +26,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php require_once dirname(__FILE__) . "/components/sidebar.php" ?>
+        <?php require_once dirname(__FILE__) . "/../components/sidebar.php" ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -36,7 +36,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php require_once dirname(__FILE__) . "/components/navbar.php" ?>
+                <?php require_once dirname(__FILE__) . "/../components/navbar.php" ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -108,13 +108,15 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 
+    <?= $script; ?>
+
 </body>
 
 </html>
 
 <?php
 
-require_once dirname(__FILE__) . "/functions/logout.php";
+require_once dirname(__FILE__) . "/../functions/logout.php";
 
 if (isset($_POST['logout']))
     logout();

@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . "/connections/database.php";
+require "./connections/database.php";
 
 function readCSVtoJSON($filename)
 {
@@ -35,10 +35,14 @@ if (!is_array($airports)) {
         $sql = "INSERT INTO Airport (AirportID, AirportName, Municipality, IataCode)
             VALUES ('$airportID', '$airportName', '$municipality', '$iataCode')";
 
-        if ($mysql->query($sql) === TRUE) {
-            echo "Data berhasil dimasukkan: $airportName<br>";
+        if ($iataCode) {
+            if ($mysql->query($sql) === TRUE) {
+                echo "Data berhasil dimasukkan: $airportName<br>";
+            } else {
+                echo "Error: " . $sql . "<br>" . $mysqli->error;
+            }
         } else {
-            echo "Error: " . $sql . "<br>" . $mysqli->error;
+            echo "Iata Code invalid";
         }
     }
 }

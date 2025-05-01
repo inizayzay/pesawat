@@ -105,7 +105,7 @@ ob_start();
     containerCssClass: ':all:',
     theme: 'bootstrap',
     ajax: {
-      url: '/api/airport.php',
+      url: 'api/airport.php',
       dataType: 'json',
       delay: 250,
       data: function(params) {

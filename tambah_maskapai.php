@@ -2,13 +2,16 @@
 
 require_once dirname(__FILE__) . "/functions/check.php";
 require_once dirname(__FILE__) . "/functions/terminal_gate.php";
+require_once dirname(__FILE__) . "/functions/airline.php";
+
+use Airline as Airline;
 
 if (!check())
   header('location: login.php');
 
 
 if (isset($_POST['create']))
-  store();
+  Airline\store();
 
 ob_start();
 ?>

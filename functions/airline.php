@@ -51,3 +51,18 @@ function update()
         echo "Error: " . $stmt->error;
     }
 }
+
+
+function delete($id)
+{
+    global $mysql;
+
+    $sql = "DELETE FROM airline WHERE AirlineID = ?";
+    $stmt = $mysql->prepare($sql);
+    $stmt->bind_param('i', $id);
+    if ($stmt->execute()) {
+        header('location: ' . $_SERVER['HTTP_REFERER']);
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+}

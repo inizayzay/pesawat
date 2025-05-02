@@ -1,7 +1,12 @@
 <?php
 require_once dirname(__FILE__) . "/functions/ticket.php";
 require_once dirname(__FILE__) . "/functions/check.php";
+use Ticket as Ticket;
 $tickets = get();
+if (isset($_GET['action']) && $_GET['action'] === 'delete') {
+    Ticket\delete($_GET['id']);
+}
+
 if (!check())
   header('location: login.php');
 
@@ -43,14 +48,14 @@ ob_start();
                             <td><?=$ticket['PassengerID']; ?></td>
                             <td><?=$ticket['FlightID']; ?></td>
                             <td>
-                                <button class="btn btn-primary">
+                                <a class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                     Edit
-                                </button>
-                                <button class="btn btn-danger">
+                    </a>
+                                <a class="btn btn-danger" href="?action=delete&id=<?= $ticket['TiketID'] ?>">
                                     <i class="fas fa-trash"></i>
                                     Hapus
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     <?php } ?>

@@ -1,16 +1,23 @@
 <?php
 require_once dirname(__FILE__) . "/functions/passenger.php";
 require_once dirname(__FILE__) . "/functions/check.php";
-$passengers = get();
+use Passenger as Passenger;
 
-if (!check())
-  header('location: login.php');
+$passengers = Passenger\get();
 
-  
+if (isset($_GET['action']) && $_GET['action'] === 'delete') {
+    Passenger\delete($_GET['id']);
+}
+
+if (!check()) {
+    header('location: login.php');
+}
+
 ob_start();
 ?>
+
 <!-- Page Heading -->
-<p class="mb-4">The Passenger page displays information about airline passengers using a third-party plugin called DataTables. DataTables helps organize and manage passenger data interactively, with features such as sorting, searching, and pagination. <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+<p class="mb-4">The Passenger page displays information about airline passengers using a third-party plugin called DataTables. DataTables helps organize and manage passenger data interactively, with features such as sorting, searching, and pagination.</p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -36,13 +43,11 @@ ob_start();
                             <td><?= $passenger['Name']; ?></td>
                             <td>
                                 <button class="btn btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                    Edit
+                                    <i class="fas fa-edit"></i> Edit
                                 </button>
-                                <button class="btn btn-danger">
-                                    <i class="fas fa-trash"></i>
-                                    Hapus
-                                </button>
+                                <a class="btn btn-danger" href="?action=delete&id=<?= $passenger['PassengerID'] ?>">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -52,9 +57,15 @@ ob_start();
     </div>
 </div>
 
-<?php
+<!-- Initialize DataTables -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dataTable').DataTable(); // This will turn the table into a DataTable
+    });
+</script>
 
+<?php
 $content = ob_get_clean();
 $title = "Passenger Data";
-
 include "./layouts/app.php";
+?>

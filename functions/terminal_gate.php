@@ -12,3 +12,12 @@ function get()
     $stmt->execute();
     return $stmt->get_result();
 }
+
+
+function delete($id) {
+    global $mysql;
+    $stmt = $mysql->prepare("DELETE FROM terminal_gate WHERE ID = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+}
+

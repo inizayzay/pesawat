@@ -1,151 +1,249 @@
-
-<!-- Page Heading -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Pencarian Tiket Pesawat</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cari Tiket Pesawat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 40px 20px;
+    }
 
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
 
-        table {
-            width: 100%;
-            margin-bottom: 20px;
-        }
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 30px;
+    }
 
-        td {
-            padding: 10px;
-        }
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
 
-        input[type="text"], select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
+    .input-icon {
+      position: relative;
+      flex: 1;
+    }
 
-        .swap-icon {
-            text-align: center;
-            font-size: 12px;
-            color: #000; 
-            cursor: pointer;
-            transform: rotate(90deg);
-            margin:  auto;
-            display: left;
-        }
+    .input-icon i {
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      transform: translateY(-50%);
+      color: #888;
+    }
 
-        .swap-icon:hover {
-            color: #0056b3;
-        }
+    .input-icon input {
+      width: 100%;
+      padding: 12px 12px 12px 40px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 15px;
+    }
 
-        .result-table {
-            width: 100%;
-            border: 1px solid #ccc;
-            text-align: center;
-            background-color: #d3d3d3;
-            border-radius: 10px;
-        }
+    .swap-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background-color: #e6f0ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
 
-       
-        button {
-            background-color: #28a745;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-        }
+    .swap-btn:hover {
+      background-color: #cce0ff;
+    }
 
-        button:hover {
-            background-color: #218838;
-        }
-    </style>
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background-color: white;
+      border: 1px solid #dce1e7;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      position: relative;
+    }
+
+    .filter-btn select {
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      padding-right: 18px;
+      cursor: pointer;
+      appearance: none;
+    }
+
+    .filter-btn select:focus {
+      outline: none;
+    }
+
+    .filter-btn i {
+      color: #555;
+    }
+
+    .filter-btn::after {
+      content: '\f078';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 14px;
+      font-size: 10px;
+      color: #666;
+      pointer-events: none;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      padding: 14px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #eef3f8;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, border 0.3s;
+  border: 2px solid transparent;
+}
+
+.result:hover {
+  background-color: #dde7f2;
+}
+
+.result.selected {
+  border-color: #007bff;
+  background-color: #d0e5ff;
+}
+
+    @media (max-width: 600px) {
+      .input-group {
+        flex-direction: column;
+      }
+
+      .swap-btn {
+        margin: 10px auto;
+      }
+
+      .filter-bar {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<h1>Pencarian Tiket Pesawat</h1>
+<div class="container">
+  <h2>Search Flight Ticket</h2>
 
-<form method="post" action="simpan.php">
-    <table>
-        <tr>
-            <td>
-                <label for="maskapai">Filter Maskapai</label><br>
-                <select name="maskapai" id="maskapai" required>
-                    <option value="">-- Pilih Maskapai --</option>
-                    <option value="Garuda Indonesia">Garuda Indonesia</option>
-                    <option value="Lion Air">Lion Air</option>
-                    <option value="Citilink">Citilink</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="Harga">Filter Harga</label><br>
-                <select name="Harga" id="Harga">
-                    <option value="">-- Pilih Rentang Harga --</option>
-                    <option value="diatas 400">Di atas 400</option>
-                    <option value="dibawah 400">Di bawah 400</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="dari" id="dari" placeholder="Dari (asal)" required>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <i class="fas fa-exchange-alt swap-icon" onclick="tukarLokasi()"></i>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" name="tujuan" id="tujuan" placeholder="Ke (tujuan)" required>
-            </td>
-        </tr>
-    </table>
+  <form onsubmit="return false;">
+    <div class="input-group">
+      <div class="input-icon">
+        <i class="fas fa-plane-departure"></i>
+        <input type="text" id="dari" placeholder="Departure City" required>
+      </div>
+      <button type="button" class="swap-btn" onclick="tukarLokasi()">
+        <i class="fas fa-exchange-alt"></i>
+      </button>
+      <div class="input-icon">
+        <i class="fas fa-plane-arrival"></i>
+        <input type="text" id="tujuan" placeholder="Destination City" required>
+      </div>
+    </div>
 
-    <!-- Tabel hasil penerbangan -->
-    <table class="result-table">
-        <tr>
-            <td><strong>Citilink</strong><br><b>Jakarta - Jambi</b><br>CGK-DJB</td>
-            <td>18.00 - 19.00</td>
-            <td>Rp. 400.000</td>
-        </tr>
-    </table>
+    <div class="filter-bar">
+      <div class="filter-btn">
+        <i class="fas fa-plane"></i>
+        <select id="Airline">
+          <option value="">Airline</option>
+          <option>Garuda Indonesia</option>
+          <option>Lion Air</option>
+          <option>Citilink</option>
+        </select>
+      </div>
 
-    <button type="submit">Kirim Data</button>
-</form>
+      <div class="filter-btn">
+        <i class="fas fa-tag"></i>
+        <select id="Price">
+          <option value="">Price</option>
+          <option value="diatas 400">Di atas 400</option>
+          <option value="dibawah 400">Di bawah 400</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit">Search Ticket</button>
+
+    <div class="result" onclick="pilihTiket(this)">
+      <p><strong>Citilink</strong> • Jakarta to Jambi • 18:00 - 19:00 • Rp. 400.000</p>
+    </div>
+  </form>
+</div>
 
 <script>
-function tukarLokasi() {
+  function tukarLokasi() {
     const dari = document.getElementById("dari");
     const tujuan = document.getElementById("tujuan");
     const temp = dari.value;
     dari.value = tujuan.value;
     tujuan.value = temp;
-}
+  }
+  function pilihTiket(element) {
+    // Hapus pilihan lain jika ada
+    document.querySelectorAll('.result').forEach(el => el.classList.remove('selected'));
+  
+   // Tandai yang dipilih
+   element.classList.add('selected');
+
+// Contoh: Simpan data atau tampilkan alert
+    }
 </script>
 
 </body>

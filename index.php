@@ -60,6 +60,8 @@ ob_start();
 
 form .input-group {
   margin-bottom: 15px;
+  display: flex;
+  gap: 5px; /* Ini buat kasih jarak */
 }
 
 form label {
@@ -84,8 +86,9 @@ form input[type="date"] {
 }
 
 .checkbox-group input[type="checkbox"] {
-  transform: scale(1.3);
-  margin: 0; /* Reset margin default browser */
+  transform: scale(2);
+  margin: 5; /* Reset margin default browser */
+
 }
 
 
@@ -119,7 +122,7 @@ button:hover {
       </div>
       <form>
         <div class="input-group">
-          <label for="from">Dari</label>
+          <label for="from">From</label>
           <select id="single" name="departureAirport" class="form-control select2-departure-airport">
         <option></option>
         <optgroup label="Alaskan/Hawaiian Time Zone">
@@ -129,7 +132,7 @@ button:hover {
       </select>
         </div>
         <div class="input-group">
-          <label for="to">Ke</label>
+          <label for="to">To</label>
           <select id="single" name="departureAirport" class="form-control select2-departure-airport">
         <option></option>
         <optgroup label="Alaskan/Hawaiian Time Zone">
@@ -139,19 +142,39 @@ button:hover {
       </select>
         </div>
         <div class="input-group">
-          <label for="departure">Pergi</label>
+          <label for="departure">Go</label>
           <input type="date" id="departure" />
         </div>
         <div class="input-group checkbox-group">
   <label for="return">
     <input type="checkbox" id="return" />
-    Pulang-pergi?
+    Round-Trip?
   </label>
 </div>
 
         <div class="input-group">
-          <label for="passenger">Penumpang & Kelas</label>
-          <input type="text" id="passenger" value="1 Penumpang, Ekonomi" readonly />
+          <label for="passenger">Passenger</label><br>
+          <select name="Passenger" id="Passenger" class="form-control select2-Passenger">
+        <option></option>
+        <optgroup label="Adult (12+ years)">
+          <option value="Adult">Adult</option>
+        </optgroup>
+        <optgroup label="Child (2-11 years)">
+          <option value="Child">Child</option>
+        </optgroup>
+        <optgroup label="Infant (under 2 years)">
+          <option value="Infant">Infant</option>
+        </optgroup>
+        </div>
+        </select>
+        <div class="input-group">
+          <label for="Class">Class</label>
+          <select id="Class" name="Class" class="form-control select2-departure-class">
+        <option></option>
+        <optgroup label="Business Class">
+          <option value="BS">Business</option>
+        </optgroup>
+      </select>
         </div>
         <button type="submit">Ayo Cari</button>
       </form>
@@ -198,6 +221,28 @@ ob_start();
       },
       cache: true
     }
+  });
+  $(document).ready(function() {
+    // Aktifkan Select2 untuk dropdown Passenger
+    $('.select2-Passenger').select2({
+      placeholder: "Select passenger type",
+      allowClear: true
+    });
+
+    // Aktifkan Select2 untuk dropdown Class
+    $('.select2-departure-class').select2({
+      placeholder: "Select class",
+      allowClear: true
+    });
+
+    // Contoh event handler jika kamu mau menangkap perubahan value
+    $('#Passenger').on('change', function() {
+      console.log('Passenger selected:', $(this).val());
+    });
+
+    $('#Class').on('change', function() {
+      console.log('Class selected:', $(this).val());
+    });
   });
 
 

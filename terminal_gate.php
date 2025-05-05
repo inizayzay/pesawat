@@ -51,7 +51,7 @@ ob_start();
                                     <i class="fas fa-edit"></i>
                                     Edit
                                 </a>
-                                <a class="btn btn-danger" href="?action=delete&id=<?= $terminal_gates['TerminalGateID'] ?>">
+                                <a class="btn btn-danger" href="?action=delete&id=<?= $item['TerminalGateID'] ?>">
                                     <i class="fas fa-trash"></i>
                                     Hapus
                                 </a>

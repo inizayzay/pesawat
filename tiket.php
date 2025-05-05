@@ -2,7 +2,7 @@
 require_once dirname(__FILE__) . "/functions/ticket.php";
 require_once dirname(__FILE__) . "/functions/check.php";
 use Ticket as Ticket;
-$tickets = get();
+$tickets = Ticket\get();
 if (isset($_GET['action']) && $_GET['action'] === 'delete') {
     Ticket\delete($_GET['id']);
 }
@@ -51,8 +51,8 @@ ob_start();
                                 <a class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                     Edit
-                    </a>
-                                <a class="btn btn-danger" href="?action=delete&id=<?= $ticket['TiketID'] ?>">
+                                </a>
+                                <a class="btn btn-danger" href="?action=delete&id=<?= $ticket['TicketID']; ?>">
                                     <i class="fas fa-trash"></i>
                                     Hapus
                                 </a>

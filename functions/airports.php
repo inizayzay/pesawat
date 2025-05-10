@@ -1,6 +1,9 @@
 <?php
 
+namespace Airport;
+
 require_once dirname(__FILE__) . "/../connections/database.php";
+
 
 function get()
 {
@@ -24,4 +27,16 @@ function get()
     }
 
     return $airports;
+}
+
+
+function find($iataCode)
+{
+    global $mysql;
+
+    $stmt = $mysql->prepare("SELECT AirportName,Municipality,IataCode FROM airport WHERE IataCode =?");
+    $stmt->bind_param('s', $iataCode);
+
+    $stmt->execute();
+    return $stmt->get_result();
 }

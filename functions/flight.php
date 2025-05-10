@@ -63,12 +63,13 @@ function update()
 {
     global $mysql;
 
-    $flightNumber = $_POST['flightNumber']; //  'JT123';
-    $departureDate =  $_POST['departureDate']; // '2025-05-10';
-    $departureAirport = $_POST['departureAirport']; //  'CGK';
-    $arrivalAirport = $_POST['arrivalAirport']; //  'DPS';
-    $departureTime =  $_POST['departureTime']; // '08:00:00';
-    $boardingTime =  $_POST['boardingTime']; // '07:30:00';
+    $flightID = $_GET['id'];
+    $flightNumber = $_POST['flightNumber'];
+    $departureDate = $_POST['departureDate'];
+    $departureAirport = $_POST['departureAirport'];
+    $arrivalAirport = $_POST['arrivalAirport'];
+    $departureTime = $_POST['departureTime'];
+    $boardingTime = $_POST['boardingTime'];
     $airlineID = $_POST['airline'];
     $terminalGateID = $_POST['terminal'];
     $MaxPassenger = $_POST['airplanepassenger'];
@@ -81,13 +82,13 @@ function update()
         DepartureTime = ?, 
         BoardingTime = ?, 
         AirlineID = ?, 
-        TerminalGateID = ?
+        TerminalGateID = ?, 
         MaxPassenger = ?
     WHERE FlightID = ?";
 
     $stmt = $mysql->prepare($sql);
     $stmt->bind_param(
-        "ssssssii",
+        "ssssssiiii",
         $flightNumber,
         $departureDate,
         $departureAirport,
@@ -96,8 +97,10 @@ function update()
         $boardingTime,
         $airlineID,
         $terminalGateID,
-        $MaxPassenger
+        $MaxPassenger,
+        $flightID
     );
+    $stmt->execute();
 
-    echo "Flight berhasil ditambahkan!";
+    echo "Flight berhasil diupdate!";
 }

@@ -1,5 +1,6 @@
 <?php
 
+require_once dirname(__FILE__) . "/functions/airports.php";
 require_once dirname(__FILE__) . "/functions/airline.php";
 require_once dirname(__FILE__) . "/functions/terminal_gate.php";
 require_once dirname(__FILE__) . "/functions/check.php";
@@ -12,15 +13,18 @@ use Flight as Flight;
 $airlines = Airline\get();
 $terminalGates = Terminal\get();
 
-if (isset($_POST['create']))
-    Flight\store();
+$airports = Airport\get();
+
+if (isset($_POST['edit']))
+    Flight\update();
 
 if (!check())
     header('location: login.php');
 
 $flight = Flight\find($_GET['id'])->fetch_assoc();
 
-print_r($flight);
+$defaultDepartureAirport = Airport\find($flight['DepartureAirport'])->fetch_assoc();
+$defaultArrivalAirport = Airport\find($flight['ArrivalAirport'])->fetch_assoc();
 
 ob_start();
 ?>
@@ -70,7 +74,7 @@ ob_start();
             <select type="text" class="form-control" id="airline" name="airline" placeholder="Enter Airline" required>
                 <option disabled value="">-- Pilih ---</option>
                 <?php while ($airline = $airlines->fetch_assoc()) { ?>
-                    <option <?= $airline['AirlineID'] === $flight['AirlineID'] ? 'checked' : '' ?> value="<?= $airline['AirlineID'] ?>"><?= $airline['AirlineName'] ?></option>
+                    <option <?= $airline['AirlineID'] === $flight['AirlineID'] ? 'selected' : '' ?> value="<?= $airline['AirlineID'] ?>"><?= $airline['AirlineName'] ?></option>
                 <?php } ?>
             </select>
         </div>
@@ -79,7 +83,7 @@ ob_start();
             <select type="text" class="form-control" id="terminal" name="terminal" placeholder="Enter Airline" required>
                 <option disabled value="">-- Pilih ---</option>
                 <?php while ($terminalGate = $terminalGates->fetch_assoc()) { ?>
-                    <option value="<?= $terminalGate['TerminalGateID'] ?>"><?= $terminalGate['Terminal'] . ' ' . $terminalGate['Gate']; ?></option>
+                    <option <?= $terminalGate['TerminalGateID'] === $flight['TerminalGateID'] ? 'selected' : '' ?> value="<?= $terminalGate['TerminalGateID'] ?>"><?= $terminalGate['Terminal'] . ' ' . $terminalGate['Gate']; ?></option>
                 <?php } ?>
             </select>
         </div>
@@ -87,7 +91,7 @@ ob_start();
             <label for="flightNumber">Max Passenger</label>
             <input type="text" class="form-control" id="airplane passenger" name="airplanepassenger" value="<?= $flight['MaxPassenger'] ?>" placeholder="Enter passenger" required>
         </div>
-        <button type="submit" class="btn btn-primary" name="create"> <i class="fas fa-save"></i> Save</button>
+        <button type="submit" class="btn btn-primary" name="edit"> <i class="fas fa-save"></i> Save</button>
 
     </form>
 </div>
@@ -129,8 +133,11 @@ ob_start();
         }
     });
 
-    const defaultOption = new Option("Nama User Default", 2, true, true);
-    $('#userSelect').append(defaultOption).trigger('change');
+    const defaultDepartureAirport = new Option("<?= $defaultDepartureAirport['AirportName'] ?>", "<?= $defaultDepartureAirport['IataCode'] ?>", true, true);
+    $('.select2-departure-airport').append(defaultDepartureAirport).trigger('change');
+
+    const defaultArrivalAirport = new Option("<?= $defaultArrivalAirport['AirportName'] ?>", "<?= $defaultArrivalAirport['IataCode'] ?>", true, true);
+    $('.select2-arrival-airport').append(defaultArrivalAirport).trigger('change');
 </script>
 
 <?php

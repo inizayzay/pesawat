@@ -5,6 +5,17 @@ namespace Airline;
 require_once dirname(__FILE__) . "/../connections/database.php";
 
 
+function find($id)
+{
+    global $mysql;
+
+    $stmt = $mysql->prepare("SELECT * FROM airline WHERE AirlineID = ?");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
+
 // Buat fungsi get
 function get()
 {
@@ -36,6 +47,7 @@ function update()
 {
     global $mysql;
 
+    $airlineID = (int) $_GET['id'];
     $airlineName = $_POST['airlineName'];
 
     $sql = "UPDATE Airline 
@@ -43,7 +55,7 @@ function update()
     WHERE AirlineID = ?";
 
     $stmt = $mysql->prepare($sql);
-    $stmt->bind_param("ssi", $airlineName, $airlineID);
+    $stmt->bind_param("si", $airlineName, $airlineID);
 
     if ($stmt->execute()) {
         echo "Airline berhasil diupdate!";

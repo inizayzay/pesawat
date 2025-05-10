@@ -47,7 +47,7 @@ ob_start();
                             <td><?= $item['Terminal']; ?></td>
                             <td><?= $item['Gate']; ?></td>
                             <td>
-                                <a class="btn btn-primary">
+                                <a class="btn btn-primary" href="edit_terminal_gate.php?action=edit&id=<?= $item['TerminalGateID'] ?>">
                                     <i class="fas fa-edit"></i>
                                     Edit
                                 </a>

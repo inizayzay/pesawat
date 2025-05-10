@@ -3,12 +3,14 @@
 require_once dirname(__FILE__) . "/functions/check.php";
 require_once dirname(__FILE__) . "/functions/terminal_gate.php";
 
+use TerminalGate as TerminalGate;
+
 if (!check())
   header('location: login.php');
 
 
 if (isset($_POST['create']))
-  store();
+  TerminalGate\store();
 
 ob_start();
 ?>

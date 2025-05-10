@@ -50,7 +50,7 @@ ob_start();
                             <td><?= $airline['AirlineID']; ?></td>
                             <td><?= $airline['AirlineName']; ?></td>
                             <td>
-                                <a class="btn btn-primary">
+                                <a href="edit_maskapai.php?aciton=edit&id=<?= $airline['AirlineID'] ?>" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                     Edit
                                 </a>

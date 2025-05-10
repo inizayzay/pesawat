@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__FILE__) . "/functions/passenger.php";
 require_once dirname(__FILE__) . "/functions/check.php";
+
 use Passenger as Passenger;
 
 $passengers = Passenger\get();
@@ -35,19 +36,19 @@ ob_start();
                     </tr>
                 </thead>
                 <tbody>
-                <?php
+                    <?php
                     while ($passenger = $passengers->fetch_assoc()) {
                     ?>
                         <tr>
                             <td><?= $passenger['PassengerID']; ?></td>
                             <td><?= $passenger['Name']; ?></td>
                             <td>
-                                <button class="btn btn-primary">
+                                <!-- <a class="btn btn-primary" href="edit_penumpang.php?action=edit&id=<?= $passenger['PassengerID'] ?>">
                                     <i class="fas fa-edit"></i> Edit
-                                </button>
+                                </a>
                                 <a class="btn btn-danger" href="?action=delete&id=<?= $passenger['PassengerID'] ?>">
                                     <i class="fas fa-trash"></i> Hapus
-                                </a>
+                                </a> -->
                             </td>
                         </tr>
                     <?php } ?>

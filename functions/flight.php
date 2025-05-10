@@ -4,6 +4,16 @@ namespace Flight;
 
 require_once dirname(__FILE__) . "/../connections/database.php";
 
+function find($id)
+{
+    global $mysql;
+
+    $stmt = $mysql->prepare("SELECT * FROM flight WHERE FlightID = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
 function get()
 {
     global $mysql;

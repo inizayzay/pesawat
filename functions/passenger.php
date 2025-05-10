@@ -3,7 +3,6 @@ namespace Passenger;
 
 require_once dirname(__FILE__) . "/../connections/database.php";
 
-
 // Buat fungsi get
 function get()
 {

@@ -12,19 +12,21 @@ if (!check())
 if (isset($_POST['edit']))
     TerminalGate\update();
 
+$terminalGate = TerminalGate\find($_GET['id'])->fetch_assoc();
+
 ob_start();
 ?>
 <div class="container mt-4">
     <form action="" method="post">
         <div class="form-group">
             <label for="Terminal">Name Terminal</label>
-            <input type="text" class="form-control" id="Terminal" name="Terminal" placeholder="Enter Terminal " required>
+            <input type="text" class="form-control" id="Terminal" name="Terminal" value="<?= $terminalGate["Terminal"]; ?>" placeholder="Enter Terminal " required>
         </div>
         <div class="form-group">
             <label for="Gate">Name gate</label>
-            <input type="text" class="form-control" id="Gate" name="Gate" placeholder="Enter Gate" required>
+            <input type="text" class="form-control" id="Gate" name="Gate" value="<?= $terminalGate["Gate"]; ?>" placeholder="Enter Gate" required>
         </div>
-        <button type="submit" class="btn btn-primary" name="create"> <i class="fas fa-save"></i> Save</button>
+        <button type="submit" class="btn btn-primary" name="edit"> <i class="fas fa-save"></i> Save</button>
     </form>
 </div>
 

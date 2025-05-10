@@ -53,7 +53,7 @@ ob_start();
                             <td><?= $flight['BoardingTime']; ?></td>
                             <td><?= $flight['MaxPassenger']; ?></td>
                             <td>
-                                <a class="btn btn-primary">
+                                <a class="btn btn-primary" href="edit_flight.php?action=edit&id=<?= $flight['FlightID'] ?>">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
                                 <a class="btn btn-danger" href="?action=delete&id=<?= $flight['FlightID'] ?>">

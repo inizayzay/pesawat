@@ -6,9 +6,9 @@ use Passenger as Passenger;
 
 $passengers = Passenger\get();
 
-if (isset($_GET['action']) && $_GET['action'] === 'delete') {
-    Passenger\delete($_GET['id']);
-}
+// if (isset($_GET['action']) && $_GET['action'] === 'delete') {
+//     Passenger\delete($_GET['id']);
+// }
 
 if (!check()) {
     header('location: login.php');

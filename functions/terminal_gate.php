@@ -4,6 +4,16 @@ namespace TerminalGate;
 
 require_once dirname(__FILE__) . "/../connections/database.php";
 
+function find($id)
+{
+    global $mysql;
+
+    $stmt = $mysql->prepare("SELECT * FROM terminal_gate WHERE TerminalGateID = ?");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
 function store()
 {
     global $mysql;
@@ -26,17 +36,16 @@ function update()
 {
     global $mysql;
 
-    $airlineName = $_POST['airlineName'];
+    $id = $_GET['id'];
+    $terminal = $_POST['Terminal'];
+    $gate = $_POST['Gate'];
 
-    $sql = "UPDATE Airline 
-    SET AirlineName = ?
-    WHERE AirlineID = ?";
-
+    $sql = "UPDATE terminal_gate SET Terminal = ?, Gate = ?  WHERE TerminalGateID = ?";
     $stmt = $mysql->prepare($sql);
-    $stmt->bind_param("ssi", $airlineName, $airlineID);
+    $stmt->bind_param("ssi", $terminal, $gate, $id);
 
     if ($stmt->execute()) {
-        echo "Airline berhasil diupdate!";
+        echo "Terminal & Gate berhasil diupdate!";
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -46,7 +55,7 @@ function get()
 {
     global $mysql;
 
-    $stmt = $mysql->prepare("SELECT * FROM terminal_gate ORDER BY Terminal & Gate DESC");
+    $stmt = $mysql->prepare("SELECT * FROM terminal_gate ORDER BY TerminalGateID DESC");
     $stmt->execute();
     return $stmt->get_result();
 }
@@ -55,7 +64,13 @@ function get()
 function delete($id)
 {
     global $mysql;
-    $stmt = $mysql->prepare("DELETE FROM terminal_gate WHERE ID = ?");
+    $stmt = $mysql->prepare("DELETE FROM terminal_gate WHERE TerminalGateID = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
+
+    if ($stmt->execute()) {
+        echo "Terminal & Gate berhasil dihapus!";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
 }

@@ -52,7 +52,6 @@ ob_start();
     <div class="result" onclick="pilihTiket(this)">
       <p><strong>Citilink</strong> • Jakarta to Jambi • 18:00 - 19:00 • Rp. 400.000</p>
     </div>
-    <div class="result" onclick="pilihTiekt(this)"></div>
   </form>
 </div>
 

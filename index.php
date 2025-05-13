@@ -13,177 +13,251 @@ ob_start();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Booking Tiket Pesawat</title>
-  <link rel="stylesheet" href="style.css"/>
-</head>
-<style>
-  body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: url('https://images.unsplash.com/photo-1549921296-3a6b99f3b2a9') no-repeat center center fixed;
-  background-size: cover;
-  align-items: center;
-  
-}
+  <title>Cari Tiket Pesawat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-.background {
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  backdrop-filter: blur(2px);
-}
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 40px 20px;
+    }
 
-.card {
-  background-color: white;
-  padding: 25px;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .input-icon {
+      position: relative;
+      flex: 1;
+    }
+
+    .input-icon i {
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      transform: translateY(-50%);
+      color: #888;
+    }
+
+    .input-icon input {
+      width: 100%;
+      padding: 12px 12px 12px 40px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    .swap-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background-color: #e6f0ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .swap-btn:hover {
+      background-color: #cce0ff;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background-color: white;
+      border: 1px solid #dce1e7;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      position: relative;
+    }
+
+    .filter-btn select {
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      padding-right: 18px;
+      cursor: pointer;
+      appearance: none;
+    }
+
+    .filter-btn select:focus {
+      outline: none;
+    }
+
+    .filter-btn i {
+      color: #555;
+    }
+
+    .filter-btn::after {
+      content: '\f078';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 14px;
+      font-size: 10px;
+      color: #666;
+      pointer-events: none;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      padding: 14px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #eef3f8;
   border-radius: 12px;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-.promo {
-  display: flex;
-  align-items: center;
-  background: linear-gradient(to right, #7F00FF, #E100FF);
-  color: white;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.promo .icon {
-  font-size: 20px;
-  margin-right: 10px;
-}
-
-form .input-group {
-  margin-bottom: 15px;
-  display: flex;
-  gap: 5px; /* Ini buat kasih jarak */
-}
-
-form label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-form input[type="text"],
-form input[type="date"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.checkbox-group label {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Ini buat kasih jarak */
-  font-weight: 600;
-}
-
-.checkbox-group input[type="checkbox"] {
-  transform: scale(2);
-  margin: 5; /* Reset margin default browser */
-
-}
-
-
-button {
-  width: 100%;
-  background-color: #007BFF;
-  color: white;
-  font-size: 16px;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
+  text-align: center;
   cursor: pointer;
+  transition: background-color 0.3s, border 0.3s;
+  border: 2px solid transparent;
 }
 
-button:hover {
-  background-color: #0056b3;
+.result:hover {
+  background-color: #dde7f2;
 }
 
-</style>
+.result.selected {
+  border-color: #007bff;
+  background-color: #d0e5ff;
+}
+
+    @media (max-width: 600px) {
+      .input-group {
+        flex-direction: column;
+      }
+
+      .swap-btn {
+        margin: 10px auto;
+      }
+
+      .filter-bar {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
 <body>
-<form method="post" action="beli_tiket.php">
 
-  <div class="background">
-    <div class="card">
-      <div class="promo">
-        <span class="icon">🎉</span>
-        <p>
-          Jaminan Harga Termurah! Ada tiket domestik yang lebih murah?
-          Klaim 2x selisih harganya! (*)
-        </p>
+<div class="container">
+  <h2>Search Flight Ticket</h2>
+
+  <form onsubmit="return false;">
+    <div class="input-group">
+      <div class="input-icon">
+        <i class="fas fa-plane-departure"></i>
+        <input type="text" id="dari" placeholder="Departure City" required>
       </div>
-      <form>
-        <div class="input-group">
-          <label for="from">From</label>
-          <select id="single" name="departureAirport" class="form-control select2-departure-airport">
-        <option></option>
-        <optgroup label="Alaskan/Hawaiian Time Zone">
-          <option value="AK">Alaska</option>
-          <option value="HI" disabled="disabled">Hawaii</option>
-        </optgroup>
-      </select>
-        </div>
-        <div class="input-group">
-          <label for="to">To</label>
-          <select id="single" name="departureAirport" class="form-control select2-departure-airport">
-        <option></option>
-        <optgroup label="Alaskan/Hawaiian Time Zone">
-          <option value="AK">Alaska</option>
-          <option value="HI" disabled="disabled">Hawaii</option>
-        </optgroup>
-      </select>
-        </div>
-        <div class="input-group">
-          <label for="departure">Go</label>
-          <input type="date" id="departure" />
-        </div>
-        <div class="input-group checkbox-group">
-  <label for="return">
-    <input type="checkbox" id="return" />
-    Round-Trip?
-  </label>
+      <button type="button" class="swap-btn" onclick="tukarLokasi()">
+        <i class="fas fa-exchange-alt"></i>
+      </button>
+      <div class="input-icon">
+        <i class="fas fa-plane-arrival"></i>
+        <input type="text" id="tujuan" placeholder="Destination City" required>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-btn">
+        <i class="fas fa-plane"></i>
+        <select id="Airline">
+          <option value="">Airline</option>
+          <option>Garuda Indonesia</option>
+          <option>Lion Air</option>
+          <option>Citilink</option>
+        </select>
+      </div>
+
+      <div class="filter-btn">
+        <i class="fas fa-tag"></i>
+        <select id="Price">
+          <option value="">Price</option>
+          <option value="diatas 400">Di atas 400</option>
+          <option value="dibawah 400">Di bawah 400</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit">Search Ticket</button>
+
+    <div class="result" onclick="pilihTiket(this)">
+      <p><strong>Citilink</strong> • Jakarta to Jambi • 18:00 - 19:00 • Rp. 400.000</p>
+    </div>
+  </form>
 </div>
 
-        <div class="input-group">
-          <label for="passenger">Passenger</label><br>
-          <select name="Passenger" id="Passenger" class="form-control select2-Passenger">
-        <option></option>
-        <optgroup label="Adult (12+ years)">
-          <option value="Adult">Adult</option>
-        </optgroup>
-        <optgroup label="Child (2-11 years)">
-          <option value="Child">Child</option>
-        </optgroup>
-        <optgroup label="Infant (under 2 years)">
-          <option value="Infant">Infant</option>
-        </optgroup>
-        </div>
-        </select>
-        <div class="input-group">
-          <label for="Class">Class</label>
-          <select id="Class" name="Class" class="form-control select2-departure-class">
-        <option></option>
-        <optgroup label="Business Class">
-          <option value="BS">Business</option>
-        </optgroup>
-      </select>
-        </div>
-        <button type="submit">Ayo Cari</button>
-      </form>
-    </div>
-  </div>
+<script>
+  function tukarLokasi() {
+    const dari = document.getElementById("dari");
+    const tujuan = document.getElementById("tujuan");
+    const temp = dari.value;
+    dari.value = tujuan.value;
+    tujuan.value = temp;
+  }
+  function pilihTiket(element) {
+    // Hapus pilihan lain jika ada
+    document.querySelectorAll('.result').forEach(el => el.classList.remove('selected'));
+  
+   // Tandai yang dipilih
+   element.classList.add('selected');
+
+// Contoh: Simpan data atau tampilkan alert
+    }
+</script>
+
 </body>
 </html>
-
-
 <?php
 $content = ob_get_clean();
 
@@ -250,7 +324,7 @@ ob_start();
 
 <?php 
 $script = ob_get_clean();
-$title = "Dashboard";
+$title = "";
 
 include "./layouts/app.php"
 ?>

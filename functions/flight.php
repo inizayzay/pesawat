@@ -104,3 +104,17 @@ function update()
 
     echo "Flight berhasil diupdate!";
 }
+
+function delete($id)
+{
+    global $mysql;
+
+    $sql = "DELETE FROM flight WHERE FlightID = ?";
+    $stmt = $mysql->prepare($sql);
+    $stmt->bind_param('i', $id);
+    if ($stmt->execute()) {
+        header('location: ' . $_SERVER['HTTP_REFERER']);
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+}

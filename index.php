@@ -1,9 +1,24 @@
 <?php
 
 require_once dirname(__FILE__) . "/functions/check.php";
+require_once dirname(__FILE__) . "/functions/airline.php";
+require_once dirname(__FILE__) . "/functions/flight.php";
 
-if (!check())
-  header('location: login.php');
+use Airline as Airline;
+use Flight as Flight;
+
+$airlines = Airline\get();
+
+if (!check()) {
+  header('Location: login.php');
+  exit;
+}
+
+
+if (isset($_GET['filter'])) {
+  $filter = $_GET['filter'];
+  $flights = Flight\filter($_GET);
+}
 
 ob_start();
 ?>
@@ -11,35 +26,36 @@ ob_start();
 <div class="container">
   <h2>Search Flight Ticket</h2>
 
-  <form onsubmit="return false;">
+  <form>
+    <input type="hidden" name="filter" value="1">
     <div class="input-group">
       <div class="input-icon">
-        <i class="fas fa-plane-departure"></i>
-        <input type="text" id="dari" placeholder="Departure City" required>
+        <!-- <i class="fas fa-plane-departure"></i> -->
+        <select id="dari" name="dari" placeholder="Departure City" required class="select2-departure-airport"></select>
       </div>
-      <button type="button" class="swap-btn" onclick="tukarLokasi()">
+      <!-- <button type="button" class="swap-btn" onclick="tukarLokasi()">
         <i class="fas fa-exchange-alt"></i>
-      </button>
+      </button> -->
       <div class="input-icon">
-        <i class="fas fa-plane-arrival"></i>
-        <input type="text" id="tujuan" placeholder="Destination City" required>
+        <!-- <i class="fas fa-plane-arrival"></i> -->
+        <select id="tujuan" name="tujuan" placeholder="Destination City" required class="select2-arrival-airport"></select>
       </div>
     </div>
 
     <div class="filter-bar">
       <div class="filter-btn">
         <i class="fas fa-plane"></i>
-        <select id="Airline">
-          <option value="">Airline</option>
-          <option>Garuda Indonesia</option>
-          <option>Lion Air</option>
-          <option>Citilink</option>
+        <select id="Airline" name="airline">
+          <option value="" disabled selected>-- Pilih Maskapai --</option>
+          <?php while ($airline = $airlines->fetch_assoc()) : ?>
+            <option value="<?= $airline['AirlineID'] ?>"><?= $airline['AirlineName'] ?></option>
+          <?php endwhile; ?>
         </select>
       </div>
 
       <div class="filter-btn">
         <i class="fas fa-tag"></i>
-        <select id="Price">
+        <select id="Price" name="price">
           <option value="">Price</option>
           <option value="diatas 400">Di atas 400</option>
           <option value="dibawah 400">Di bawah 400</option>
@@ -48,10 +64,11 @@ ob_start();
     </div>
 
     <button type="submit">Search Ticket</button>
-
-    <div class="result" onclick="pilihTiket(this)">
-      <p><strong>Citilink</strong> • Jakarta to Jambi • 18:00 - 19:00 • Rp. 400.000</p>
-    </div>
+    <?php while ($flight = $flights->fetch_assoc()): ?>
+      <div class="result" onclick="pilihTiket(this)">
+        <p><strong><?= $flight['airline_name'] ?></strong> • <?= $flight['departure_city'] ?> to <?= $flight['arrival_city'] ?> • <?= $flight['departure_time'] ?> • Rp. 400.000</p>
+      </div>
+    <?php endwhile; ?>
   </form>
 </div>
 
@@ -62,16 +79,13 @@ ob_start();
     const temp = dari.value;
     dari.value = tujuan.value;
     tujuan.value = temp;
+    $("#dari").trigger("change");
+    $("#tujuan").trigger("change");
   }
 
   function pilihTiket(element) {
-    // Hapus pilihan lain jika ada
     document.querySelectorAll('.result').forEach(el => el.classList.remove('selected'));
-
-    // Tandai yang dipilih
     element.classList.add('selected');
-
-    // Contoh: Simpan data atau tampilkan alert
   }
 </script>
 
@@ -115,12 +129,28 @@ ob_start();
     color: #888;
   }
 
-  .input-icon input {
-    width: 100%;
-    padding: 12px 12px 12px 40px;
+  .select2-container .select2-selection--single {
+    height: 44px;
+    padding-left: 40px;
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #333;
+    line-height: 44px;
+  }
+
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 100%;
+    right: 10px;
+  }
+
+  .select2-container {
+    width: 100% !important;
   }
 
   .swap-btn {
@@ -133,7 +163,7 @@ ob_start();
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: background-color 0.3s;
   }
 
   .swap-btn:hover {
@@ -199,7 +229,7 @@ ob_start();
     border-radius: 10px;
     width: 100%;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background-color 0.3s;
   }
 
   button[type="submit"]:hover {
@@ -241,65 +271,71 @@ ob_start();
     }
   }
 </style>
-<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
-
-
 <script>
-  $(".select2-departure-airport, .select2-arrival-airport").select2({
-    placeholder: 'Select Airport',
-    width: '100%',
-    containerCssClass: ':all:',
-    theme: 'bootstrap',
-    ajax: {
-      url: 'api/airport.php',
-      dataType: 'json',
-      delay: 250,
-      data: function(params) {
-        return {
-          name: params.term
-        };
-      },
-      processResults: function(data) {
-        return {
-          results: data.map(function(airport) {
-            return {
-              id: airport.IataCode,
-              text: `${airport.AirportName} – ${airport.Municipality} (${airport.IataCode})`
-            };
-          })
-        };
-      },
-      cache: true
-    }
-  });
   $(document).ready(function() {
-    // Aktifkan Select2 untuk dropdown Passenger
-    $('.select2-Passenger').select2({
-      placeholder: "Select passenger type",
-      allowClear: true
+    $(".select2-departure-airport, .select2-arrival-airport").select2({
+      placeholder: 'Select Airport',
+      width: '100%',
+      ajax: {
+        url: 'api/airport.php',
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+          return {
+            name: params.term
+          };
+        },
+        processResults: function(data) {
+          return {
+            results: data.map(function(airport) {
+              return {
+                id: airport.IataCode,
+                text: `${airport.AirportName} – ${airport.Municipality} (${airport.IataCode})`
+              };
+            })
+          };
+        },
+        cache: true
+      }
     });
 
-    // Aktifkan Select2 untuk dropdown Class
-    $('.select2-departure-class').select2({
-      placeholder: "Select class",
-      allowClear: true
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    function setSelect2Default($select, value, text) {
+      if (value && text) {
+        const option = new Option(text, value, true, true);
+        $select.append(option).trigger('change');
+      }
+    }
+
+    $.ajax({
+      url: 'api/airport.php?name=' + getQueryParam('dari'),
+      dataType: 'json',
+      success: function(data) {
+        const airport = data[0];
+        setSelect2Default($('.select2-departure-airport'), airport.IataCode, `${airport.AirportName} – ${airport.Municipality} (${airport.IataCode})`);
+      }
     });
 
-    // Contoh event handler jika kamu mau menangkap perubahan value
-    $('#Passenger').on('change', function() {
-      console.log('Passenger selected:', $(this).val());
+    $.ajax({
+      url: 'api/airport.php?name=' + getQueryParam('tujuan'),
+      dataType: 'json',
+      success: function(data) {
+        const airport = data[0];
+        setSelect2Default($('.select2-arrival-airport'), airport.IataCode, `${airport.AirportName} – ${airport.Municipality} (${airport.IataCode})`);
+      }
     });
 
-    $('#Class').on('change', function() {
-      console.log('Class selected:', $(this).val());
-    });
+    document.getElementById("Airline").value = getQueryParam("airline") || "";
+    document.getElementById("Price").value = getQueryParam("price") || "";
   });
 </script>
-
 <?php
 $script = ob_get_clean();
 $title = "";
-
-include "./layouts/app.php"
-?>
+include "./layouts/app.php";

@@ -4,6 +4,30 @@ namespace Flight;
 
 require_once dirname(__FILE__) . "/../connections/database.php";
 
+function filter($filter)
+{
+    global $mysql;
+
+    $stmt = $mysql->prepare("
+        SELECT
+        f.FlightID,
+        airline.AirlineName  as airline_name,
+        departure.Municipality as departure_city,
+        arrival.Municipality as arrival_city,
+        f.DepartureTime as departure_time
+        FROM flight f 
+        JOIN airport departure ON departure.IataCode COLLATE utf8mb4_general_ci = f.DepartureAirport COLLATE utf8mb4_general_ci
+        JOIN airport arrival ON arrival.IataCode COLLATE utf8mb4_general_ci = f.ArrivalAirport COLLATE utf8mb4_general_ci
+        JOIN airline ON airline.AirlineID = f.AirlineID
+        WHERE f.DepartureAirport COLLATE utf8mb4_general_ci = ? 
+        AND f.ArrivalAirport COLLATE utf8mb4_general_ci = ? 
+        AND f.AirlineID = ?
+    ");
+    $stmt->bind_param("ssi", $filter['dari'], $filter['tujuan'], $filter['airline']);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
 function find($id)
 {
     global $mysql;

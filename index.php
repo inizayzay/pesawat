@@ -57,18 +57,20 @@ ob_start();
         <i class="fas fa-tag"></i>
         <select id="Price" name="price">
           <option value="">Price</option>
-          <option value="diatas 400">Di atas 400</option>
-          <option value="dibawah 400">Di bawah 400</option>
+          <option value=">400">Lebih dari 400</option>
+          <option value="<=400">Kurang atau sama dengan 400</option>
         </select>
       </div>
     </div>
 
     <button type="submit">Search Ticket</button>
-    <?php while ($flight = $flights->fetch_assoc()): ?>
-      <div class="result" onclick="pilihTiket(this)">
-        <p><strong><?= $flight['airline_name'] ?></strong> • <?= $flight['departure_city'] ?> to <?= $flight['arrival_city'] ?> • <?= $flight['departure_time'] ?> • Rp. 400.000</p>
-      </div>
-    <?php endwhile; ?>
+    <?php if (isset($flights)) : ?>
+      <?php while ($flight = $flights->fetch_assoc()): ?>
+        <div class="result" onclick="pilihTiket(this)">
+          <p><strong><?= $flight['airline_name'] ?></strong> • <?= $flight['departure_city'] ?> to <?= $flight['arrival_city'] ?> • <?= $flight['departure_time'] ?> • Rp. <?= number_format($flight['flight_price']) ?></p>
+        </div>
+      <?php endwhile; ?>
+    <?php endif; ?>
   </form>
 </div>
 
@@ -96,7 +98,6 @@ ob_start();
 ?>
 <style>
   .container {
-    max-width: 800px;
     margin: 0 auto;
     background: white;
     padding: 30px;
@@ -314,7 +315,7 @@ ob_start();
     }
 
     $.ajax({
-      url: 'api/airport.php?name=' + getQueryParam('dari'),
+      url: 'api/airport.php?code=' + getQueryParam('dari'),
       dataType: 'json',
       success: function(data) {
         const airport = data[0];
@@ -323,7 +324,7 @@ ob_start();
     });
 
     $.ajax({
-      url: 'api/airport.php?name=' + getQueryParam('tujuan'),
+      url: 'api/airport.php?code=' + getQueryParam('tujuan'),
       dataType: 'json',
       success: function(data) {
         const airport = data[0];

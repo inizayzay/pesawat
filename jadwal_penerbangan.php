@@ -38,6 +38,7 @@ ob_start();
                         <th>Departure Time</th>
                         <th>Boarding Time</th>
                         <th>Max Passenger</th>
+                        <th>Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -52,6 +53,7 @@ ob_start();
                             <td><?= $flight['DepartureTime']; ?></td>
                             <td><?= $flight['BoardingTime']; ?></td>
                             <td><?= $flight['MaxPassenger']; ?></td>
+                            <td>Rp <?= number_format($flight['price'] ?? 0); ?></td>
                             <td>
                                 <a class="btn btn-primary" href="edit_flight.php?action=edit&id=<?= $flight['FlightID'] ?>">
                                     <i class="fas fa-edit"></i> Edit

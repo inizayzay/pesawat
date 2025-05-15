@@ -8,22 +8,53 @@ function filter($filter)
 {
     global $mysql;
 
-    $stmt = $mysql->prepare("
-        SELECT
-        f.FlightID,
-        airline.AirlineName  as airline_name,
-        departure.Municipality as departure_city,
-        arrival.Municipality as arrival_city,
-        f.DepartureTime as departure_time
-        FROM flight f 
-        JOIN airport departure ON departure.IataCode COLLATE utf8mb4_general_ci = f.DepartureAirport COLLATE utf8mb4_general_ci
-        JOIN airport arrival ON arrival.IataCode COLLATE utf8mb4_general_ci = f.ArrivalAirport COLLATE utf8mb4_general_ci
-        JOIN airline ON airline.AirlineID = f.AirlineID
-        WHERE f.DepartureAirport COLLATE utf8mb4_general_ci = ? 
-        AND f.ArrivalAirport COLLATE utf8mb4_general_ci = ? 
-        AND f.AirlineID = ?
-    ");
-    $stmt->bind_param("ssi", $filter['dari'], $filter['tujuan'], $filter['airline']);
+    $params = [];
+    $types = '';
+
+    $query = "
+    SELECT
+    f.FlightID,
+    airline.AirlineName  as airline_name,
+    departure.Municipality as departure_city,
+    arrival.Municipality as arrival_city,
+    f.DepartureTime as departure_time,
+    f.price as flight_price
+    FROM flight f 
+    JOIN airport departure ON departure.IataCode COLLATE utf8mb4_unicode_ci = f.DepartureAirport COLLATE utf8mb4_unicode_ci
+    JOIN airport arrival ON arrival.IataCode COLLATE utf8mb4_unicode_ci = f.ArrivalAirport COLLATE utf8mb4_unicode_ci
+    JOIN airline ON airline.AirlineID = f.AirlineID
+    WHERE 1 = 1
+    ";
+
+    if (!empty($filter['dari'])) {
+        $query .= " AND f.DepartureAirport = ?";
+        $types .= 's';
+        $params[] = $filter['dari'];
+    }
+
+    if (!empty($filter['tujuan'])) {
+        $query .= " AND f.ArrivalAirport = ?";
+        $types .= 's';
+        $params[] = $filter['tujuan'];
+    }
+
+    if (!empty($filter['airline'])) {
+        $query .= " AND f.AirlineID = ?";
+        $types .= 'i';
+        $params[] = (int)$filter['airline'];
+    }
+
+    if ($filter['price'] == '>400') {
+        $query .= " AND price > 400000";
+    } elseif ($filter['price'] == '<=400') {
+        $query .= " AND price <= 400000";
+    }
+
+    $stmt = $mysql->prepare($query);
+    if ($types !== '') {
+        $stmt->bind_param($types, ...$params);
+    }
+
     $stmt->execute();
     return $stmt->get_result();
 }
@@ -60,13 +91,14 @@ function store()
     $airlineID = $_POST['airline'];
     $terminalGateID = $_POST['terminal'];
     $MaxPassenger = $_POST['airplanepassenger'];
+    $price = $_POST['price'];
 
-    $sql = "INSERT INTO Flight (FlightNumber, DepartureDate, DepartureAirport, ArrivalAirport, DepartureTime, BoardingTime, AirlineID, TerminalGateID, MaxPassenger) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+    $sql = "INSERT INTO Flight (FlightNumber, DepartureDate, DepartureAirport, ArrivalAirport, DepartureTime, BoardingTime, AirlineID, TerminalGateID, MaxPassenger, price) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     $stmt = $mysql->prepare($sql);
     $stmt->bind_param(
-        "ssssssiii",
+        "ssssssiiii",
         $flightNumber,
         $departureDate,
         $departureAirport,
@@ -75,7 +107,8 @@ function store()
         $boardingTime,
         $airlineID,
         $terminalGateID,
-        $MaxPassenger
+        $MaxPassenger,
+        $price
     );
 
     $stmt->execute();
@@ -97,8 +130,9 @@ function update()
     $airlineID = $_POST['airline'];
     $terminalGateID = $_POST['terminal'];
     $MaxPassenger = $_POST['airplanepassenger'];
+    $price = $_POST['price'];
 
-    $sql = "UPDATE Flight 
+    $sql = "UPDATE flight 
     SET FlightNumber = ?, 
         DepartureDate = ?, 
         DepartureAirport = ?, 
@@ -107,12 +141,13 @@ function update()
         BoardingTime = ?, 
         AirlineID = ?, 
         TerminalGateID = ?, 
-        MaxPassenger = ?
+        MaxPassenger = ?,
+        price = ?
     WHERE FlightID = ?";
 
     $stmt = $mysql->prepare($sql);
     $stmt->bind_param(
-        "ssssssiiii",
+        "ssssssiiiii",
         $flightNumber,
         $departureDate,
         $departureAirport,
@@ -122,6 +157,7 @@ function update()
         $airlineID,
         $terminalGateID,
         $MaxPassenger,
+        $price,
         $flightID
     );
     $stmt->execute();

@@ -53,7 +53,7 @@
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
+                <div>
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Santuy Flight Club</span>
                     </div>

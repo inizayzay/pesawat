@@ -23,7 +23,7 @@ if (!check())
 ob_start();
 ?>
 <!-- Page Heading -->
-<p class="mb-4">The Airline Data page displays airline information using a third-party plugin called DataTables. DataTables makes it easier to manage data in an interactive table format, with features such as sorting, searching, and pagination.</a>.</p>
+<p class="mb-4">The Airline Data page displays airline information using a third-party plugin called DataTables. DataTables makes it easier to manage data in an interactive table format, with features such as sorting, searching, and pagination.</a></p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">

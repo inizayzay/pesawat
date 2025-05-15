@@ -15,7 +15,7 @@ ob_start();
 ?>
 <!-- Page Heading -->
 
-<p class="mb-4">The Ticket page displays airline ticket data with the help of the DataTables plugin. DataTables enhances the table experience by offering easy-to-use sorting, searching, and pagination functionalities for better navigation and data management.<a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+<p class="mb-4">The Ticket page displays airline ticket data with the help of the DataTables plugin. DataTables enhances the table experience by offering easy-to-use sorting, searching, and pagination functionalities for better navigation and data management.<a target="_blank" href="https://datatables.net"></a></p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">

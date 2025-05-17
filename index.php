@@ -66,12 +66,35 @@ ob_start();
     <button type="submit">Search Ticket</button>
     <?php if (isset($flights)) : ?>
       <?php while ($flight = $flights->fetch_assoc()): ?>
-        <div class="result" onclick="pilihTiket(this)">
+        <div class="result" data-flight='<?= htmlspecialchars(json_encode($flight), ENT_QUOTES, 'UTF-8') ?>' onclick="pilihTiket(this)">
           <p><strong><?= $flight['airline_name'] ?></strong> • <?= $flight['departure_city'] ?> to <?= $flight['arrival_city'] ?> • <?= $flight['departure_time'] ?> • Rp. <?= number_format($flight['flight_price']) ?></p>
         </div>
       <?php endwhile; ?>
     <?php endif; ?>
   </form>
+</div>
+
+<div class="modal fade" id="flightModal" tabindex="-1" aria-labelledby="flightModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail Tiket</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Maskapai:</strong> <span id="modal-airline"></span></p>
+        <p><strong>Dari:</strong> <span id="modal-departure"></span></p>
+        <p><strong>Tujuan:</strong> <span id="modal-arrival"></span></p>
+        <p><strong>Jam Berangkat:</strong> <span id="modal-time"></span></p>
+        <p><strong>Harga:</strong> Rp <span id="modal-price"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -86,8 +109,18 @@ ob_start();
   }
 
   function pilihTiket(element) {
+    const flight = JSON.parse(element.dataset.flight)
     document.querySelectorAll('.result').forEach(el => el.classList.remove('selected'));
     element.classList.add('selected');
+
+    document.getElementById('modal-airline').textContent = flight.airline_name;
+    document.getElementById('modal-departure').textContent = flight.departure_city;
+    document.getElementById('modal-arrival').textContent = flight.arrival_city;
+    document.getElementById('modal-time').textContent = flight.departure_time;
+    document.getElementById('modal-price').textContent = flight.flight_price.toLocaleString('id-ID');
+
+    const myModal = new bootstrap.Modal(document.getElementById('flightModal'));
+    myModal.show();
   }
 </script>
 

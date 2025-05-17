@@ -74,28 +74,42 @@ ob_start();
   </form>
 </div>
 
+<!-- Modal -->
 <div class="modal fade" id="flightModal" tabindex="-1" aria-labelledby="flightModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Detail Tiket</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <form action="simpan_tiket.php" method="POST">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detail Tiket</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Maskapai:</strong> <span id="modal-airline"></span></p>
+          <input type="hidden" name="Maskapai" id="input-airline">
+
+          <p><strong>Dari:</strong> <span id="modal-departure"></span></p>
+          <input type="hidden" name="Dari" id="input-departure">
+
+          <p><strong>Tujuan:</strong> <span id="modal-arrival"></span></p>
+          <input type="hidden" name="Tujuan" id="input-arrival">
+
+          <p><strong>Jam Berangkat:</strong> <span id="modal-time"></span></p>
+          <input type="hidden" name="Jam_Berangkat" id="input-time">
+
+          <p><strong>Harga:</strong> Rp <span id="modal-price"></span></p>
+          <input type="hidden" name="Harga" id="input-price">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Simpan</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        </div>
       </div>
-      <div class="modal-body">
-        <p><strong>Maskapai:</strong> <span id="modal-airline"></span></p>
-        <p><strong>Dari:</strong> <span id="modal-departure"></span></p>
-        <p><strong>Tujuan:</strong> <span id="modal-arrival"></span></p>
-        <p><strong>Jam Berangkat:</strong> <span id="modal-time"></span></p>
-        <p><strong>Harga:</strong> Rp <span id="modal-price"></span></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-      </div>
-    </div>
+    </form>
   </div>
 </div>
+
 
 <script>
   function tukarLokasi() {
@@ -122,6 +136,20 @@ ob_start();
     const myModal = new bootstrap.Modal(document.getElementById('flightModal'));
     myModal.show();
   }
+function isiModal(data) {
+  document.getElementById('modal-airline').innerText = data.Maskapai;
+  document.getElementById('modal-departure').innerText = data.Dari;
+  document.getElementById('modal-arrival').innerText = data.Tujuan;
+  document.getElementById('modal-time').innerText = data.Jam_Berangkat;
+  document.getElementById('modal-price').innerText = data.Harga;
+
+  document.getElementById('input-airline').value = data.Maskapai;
+  document.getElementById('input-departure').value = data.Dari;
+  document.getElementById('input-arrival').value = data.Tujuan;
+  document.getElementById('input-time').value = data.Jam_Berangkat;
+  document.getElementById('input-price').value = data.Harga;
+}
+
 </script>
 
 <?php

@@ -85,30 +85,30 @@ ob_start();
             <span>&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <p><strong>Maskapai:</strong> <span id="modal-airline"></span></p>
-          <input type="hidden" name="Maskapai" id="input-airline">
+       <div class="modal-body">
+        <p><strong>Maskapai:</strong> <span id="modal-airline"></span></p>
+        <input type="hidden" name="Maskapai" id="input-airline">
 
-          <p><strong>Dari:</strong> <span id="modal-departure"></span></p>
-          <input type="hidden" name="Dari" id="input-departure">
+        <p><strong>Dari:</strong> <span id="modal-departure"></span></p>
+        <input type="hidden" name="Dari" id="input-departure">
 
-          <p><strong>Tujuan:</strong> <span id="modal-arrival"></span></p>
-          <input type="hidden" name="Tujuan" id="input-arrival">
+        <p><strong>Tujuan:</strong> <span id="modal-arrival"></span></p>
+        <input type="hidden" name="Tujuan" id="input-arrival">
 
-          <p><strong>Jam Berangkat:</strong> <span id="modal-time"></span></p>
-          <input type="hidden" name="Jam_Berangkat" id="input-time">
+        <p><strong>Jam Berangkat:</strong> <span id="modal-time"></span></p>
+        <input type="hidden" name="Jam_Berangkat" id="input-time">
 
-          <p><strong>Harga:</strong> Rp <span id="modal-price"></span></p>
-          <input type="hidden" name="Harga" id="input-price">
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Simpan</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-        </div>
+        <p><strong>Harga:</strong> Rp <span id="modal-price"></span></p>
+        <input type="hidden" name="Harga" id="input-price">
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit">Pesan Tiket</button>
       </div>
     </form>
   </div>
 </div>
+
 
 
 <script>

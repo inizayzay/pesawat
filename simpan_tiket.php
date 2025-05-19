@@ -48,7 +48,7 @@ $passengerID = $passenger->fetch_array(MYSQLI_ASSOC)['PassengerID'];
 
 $flightID = $_POST['flightID'];
 
-$stmt = $mysql->prepare("INSERT INTO ticket (RecordLocator, eTikcketNumber, SeatNumber, BoardingZone, PassengerID, FlightID) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt = $mysql->prepare("INSERT INTO ticket (RecordLocator, eTicketNumber, SeatNumber, BoardingZone, PassengerID, FlightID) VALUES (?, ?, ?, ?, ?, ?)");
 
 $stmt->bind_param("ssssii", $recordLocator, $eTicketNumber, $seatNumber, $boardingZone, $passengerID, $flightID);
 

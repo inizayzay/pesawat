@@ -43,12 +43,12 @@ ob_start();
                             <td><?= $passenger['PassengerID']; ?></td>
                             <td><?= $passenger['Name']; ?></td>
                             <td>
-                                <!-- <a class="btn btn-primary" href="edit_penumpang.php?action=edit&id=<?= $passenger['PassengerID'] ?>">
+                                <a class="btn btn-primary" href="edit_penumpang.php?action=edit&id=<?= $passenger['PassengerID'] ?>">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
                                 <a class="btn btn-danger" href="?action=delete&id=<?= $passenger['PassengerID'] ?>">
                                     <i class="fas fa-trash"></i> Hapus
-                                </a> -->
+                                </a>
                             </td>
                         </tr>
                     <?php } ?>

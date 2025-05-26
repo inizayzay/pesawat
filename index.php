@@ -33,9 +33,9 @@ ob_start();
         <!-- <i class="fas fa-plane-departure"></i> -->
         <select id="dari" name="dari" placeholder="Departure City" required class="select2-departure-airport"></select>
       </div>
-      <!-- <button type="button" class="swap-btn" onclick="tukarLokasi()">
+      <button type="button" class="swap-btn" onclick="tukarLokasi()">
         <i class="fas fa-exchange-alt"></i>
-      </button> -->
+      </button>
       <div class="input-icon">
         <!-- <i class="fas fa-plane-arrival"></i> -->
         <select id="tujuan" name="tujuan" placeholder="Destination City" required class="select2-arrival-airport"></select>
@@ -106,7 +106,6 @@ ob_start();
     </form>
   </div>
 </div>
-
 
 
 <script>

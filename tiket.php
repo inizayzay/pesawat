@@ -20,7 +20,10 @@ ob_start();
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h6 class="m-0 font-weight-bold text-primary">Ticket Data</h6>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Unduh/ Cetak Tiket</a>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -43,7 +46,7 @@ ob_start();
                         <tr>
                             <td><?=$ticket['TicketID']; ?></td>
                             <td><?= $ticket['RecordLocator']; ?></td>
-                            <td><?= $ticket['eTikcketNumber']; ?></td>
+                            <td><?= $ticket['eTicketNumber']; ?></td>
                             <td><?=$ticket['SeatNumber']; ?></td>
                             <td><?=$ticket['PassengerID']; ?></td>
                             <td><?=$ticket['FlightID']; ?></td>

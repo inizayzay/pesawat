@@ -46,7 +46,7 @@ ob_start();
                         <tr>
                             <td><?=$ticket['TicketID']; ?></td>
                             <td><?= $ticket['RecordLocator']; ?></td>
-                            <td><?= $ticket['eTicketNumber']; ?></td>
+                            <td><?= $ticket['eTicketNumber']; ?></td> 
                             <td><?=$ticket['SeatNumber']; ?></td>
                             <td><?=$ticket['PassengerID']; ?></td>
                             <td><?=$ticket['FlightID']; ?></td>

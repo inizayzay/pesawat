@@ -2,12 +2,12 @@
 $currentPath = basename($_SERVER['PHP_SELF']);
 
 $navItems = [
-    ['title' => 'Dashboard', 'href' => 'index.php', 'icon' => 'fas fa-fw fa-tachometer-alt', 'Role' => 'Passenger'],
-    ['title' => 'Airline', 'href' => 'maskapai.php', 'icon' => 'fas fa-fw fa-plane', 'Role' => 'Admin'],
-    ['title' => 'Passenger', 'href' => 'penumpang.php', 'icon' => 'fas fa-fw fa-users', 'Role' => 'Admin'],
-    ['title' => 'Terminal & Gate', 'href' => 'terminal_gate.php', 'icon' => 'fas fa-fw fa-door-open', 'Role' => 'Admin'],
-    ['title' => 'Flight', 'href' => 'jadwal_penerbangan.php', 'icon' => 'fas fa-fw fa-calendar-alt', 'Role' => 'Admin'],
-    ['title' => 'Ticket', 'href' => 'tiket.php', 'icon' => 'fas fa-fw fa-ticket-alt', 'Role' => 'Admin'],
+    ['title' => 'Dashboard', 'href' => 'index.php', 'icon' => 'fas fa-fw fa-tachometer-alt', 'Role' => 'passenger'],
+    ['title' => 'Airline', 'href' => 'maskapai.php', 'icon' => 'fas fa-fw fa-plane', 'Role' => 'admin'],
+    ['title' => 'Passenger', 'href' => 'penumpang.php', 'icon' => 'fas fa-fw fa-users', 'Role' => 'admin'],
+    ['title' => 'Terminal & Gate', 'href' => 'terminal_gate.php', 'icon' => 'fas fa-fw fa-door-open', 'Role' => 'admin'],
+    ['title' => 'Flight', 'href' => 'jadwal_penerbangan.php', 'icon' => 'fas fa-fw fa-calendar-alt', 'Role' => 'admin'],
+    ['title' => 'Ticket', 'href' => 'tiket.php', 'icon' => 'fas fa-fw fa-ticket-alt', 'Role' => 'admin'],
 ];
 ?>
 
@@ -21,13 +21,15 @@ $navItems = [
     <hr class="sidebar-divider my-0">
 
     <?php foreach ($navItems as $item): ?>
+        <?php if ($item ['Role'] === $_SESSION['user']['Role']):
+        ?>
         <li class="nav-item <?php echo ($currentPath === $item['href']) ? 'active' : ''; ?>">
             <a class="nav-link" href="<?php echo $item['href']; ?>">
                 <i class="<?php echo $item['icon']; ?>"></i>
                 <span><?php echo $item['title']; ?></span>
             </a>
         </li>
-        <?php if ($item 'Role' === $_SESSION['user']['Role'] && $item['title'] === 'Dashboard' || $item['title'] === 'Terminal & Gate'): ?>
+        <?php if  ($item['title'] === 'Dashboard' || $item['title'] === 'Terminal & Gate'): ?>
             <hr class="sidebar-divider">
             <?php if ($item['title'] === 'Terminal & Gate'): ?>
                 <div class="sidebar-heading">
@@ -39,7 +41,10 @@ $navItems = [
                 </div>
             <?php endif; ?>
         <?php endif; ?>
+        <?php endif; ?>
+
     <?php endforeach; ?>
+
 
     <hr class="sidebar-divider d-none d-md-block">
 

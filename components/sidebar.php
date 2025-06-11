@@ -2,12 +2,12 @@
 $currentPath = basename($_SERVER['PHP_SELF']);
 
 $navItems = [
-    ['title' => 'Dashboard', 'href' => 'index.php', 'icon' => 'fas fa-fw fa-tachometer-alt'],
-    ['title' => 'Airline', 'href' => 'maskapai.php', 'icon' => 'fas fa-fw fa-plane'],
-    ['title' => 'Passenger', 'href' => 'penumpang.php', 'icon' => 'fas fa-fw fa-users'],
-    ['title' => 'Terminal & Gate', 'href' => 'terminal_gate.php', 'icon' => 'fas fa-fw fa-door-open'],
-    ['title' => 'Flight', 'href' => 'jadwal_penerbangan.php', 'icon' => 'fas fa-fw fa-calendar-alt'],
-    ['title' => 'Ticket', 'href' => 'tiket.php', 'icon' => 'fas fa-fw fa-ticket-alt'],
+    ['title' => 'Dashboard', 'href' => 'index.php', 'icon' => 'fas fa-fw fa-tachometer-alt', 'Role' => 'Passenger'],
+    ['title' => 'Airline', 'href' => 'maskapai.php', 'icon' => 'fas fa-fw fa-plane', 'Role' => 'Admin'],
+    ['title' => 'Passenger', 'href' => 'penumpang.php', 'icon' => 'fas fa-fw fa-users', 'Role' => 'Admin'],
+    ['title' => 'Terminal & Gate', 'href' => 'terminal_gate.php', 'icon' => 'fas fa-fw fa-door-open', 'Role' => 'Admin'],
+    ['title' => 'Flight', 'href' => 'jadwal_penerbangan.php', 'icon' => 'fas fa-fw fa-calendar-alt', 'Role' => 'Admin'],
+    ['title' => 'Ticket', 'href' => 'tiket.php', 'icon' => 'fas fa-fw fa-ticket-alt', 'Role' => 'Admin'],
 ];
 ?>
 

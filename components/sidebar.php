@@ -27,7 +27,7 @@ $navItems = [
                 <span><?php echo $item['title']; ?></span>
             </a>
         </li>
-        <?php if ($item['title'] === 'Dashboard' || $item['title'] === 'Terminal & Gate'): ?>
+        <?php if ($item 'Role' === $_SESSION['user']['Role'] && $item['title'] === 'Dashboard' || $item['title'] === 'Terminal & Gate'): ?>
             <hr class="sidebar-divider">
             <?php if ($item['title'] === 'Terminal & Gate'): ?>
                 <div class="sidebar-heading">

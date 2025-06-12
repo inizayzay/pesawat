@@ -83,7 +83,7 @@
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <form method="POST" action="" class="modal-footer">
+                <form method="POST" action="logout.php" class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <button class="btn btn-primary" name="logout">Logout</button>
                 </form>
@@ -100,11 +100,3 @@
 </body>
 
 </html>
-
-<?php
-
-require_once dirname(__FILE__) . "/../functions/logout.php";
-
-if (isset($_POST['logout']))
-    logout();
-?>

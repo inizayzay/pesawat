@@ -1,9 +1,11 @@
 <?php
-namespace Passenger;
+namespace Register;
 
 require_once dirname(__FILE__) . "/../connections/database.php";
 
-// Buat fungsi get
+/**
+ * Ambil semua data penumpang
+ */
 function get()
 {
     global $mysql;

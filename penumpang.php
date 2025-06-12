@@ -31,7 +31,12 @@ ob_start();
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>Full Name</th>
+                        <th>Gender</th>
+                        <th>Birth Date</th>
+                        <th>Place Of Date</th>
+                        <th>Contact Email</th>
+                        <th>Contact Number</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -42,6 +47,11 @@ ob_start();
                         <tr>
                             <td><?= $passenger['PassengerID']; ?></td>
                             <td><?= $passenger['Name']; ?></td>
+                            <td><?= $passenger['gender']; ?></td>
+                            <td><?= $passenger['BirthDate']; ?></td>
+                            <td><?= $passenger['PlaceOfDate']; ?></td>
+                            <td><?= $passenger['ContactEmail']; ?></td>
+                            <td><?= $passenger['ContactNumber']; ?></td>
                             <td>
                                 <a class="btn btn-primary" href="edit_penumpang.php?action=edit&id=<?= $passenger['PassengerID'] ?>">
                                     <i class="fas fa-edit"></i> Edit

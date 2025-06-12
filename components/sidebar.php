@@ -2,14 +2,13 @@
 $currentPath = basename($_SERVER['PHP_SELF']);
 
 $navItems = [
-
-
     ['title' => 'Dashboard', 'href' => 'index.php', 'icon' => 'fas fa-fw fa-tachometer-alt', 'Role' => ['passenger']],
     ['title' => 'Airline', 'href' => 'maskapai.php', 'icon' => 'fas fa-fw fa-plane', 'Role' => ['admin']],
-    ['title' => 'Passenger', 'href' => 'penumpang.php', 'icon' => 'fas fa-fw fa-users', 'Role' => ['admin']],
+    ['title' => 'Passenger', 'href' => 'penumpang.php', 'icon' => 'fas fa-fw fa-users', 'Role' => ['passenger']],
     ['title' => 'Terminal & Gate', 'href' => 'terminal_gate.php', 'icon' => 'fas fa-fw fa-door-open', 'Role' => ['admin']],
     ['title' => 'Flight', 'href' => 'jadwal_penerbangan.php', 'icon' => 'fas fa-fw fa-calendar-alt', 'Role' => ['admin']],
     ['title' => 'Ticket', 'href' => 'tiket.php', 'icon' => 'fas fa-fw fa-ticket-alt', 'Role' => ['admin', 'passenger']],
+    ['title' => 'Register', 'href' => 'register.php', 'icon' => 'fas fa-fw fa-user-plus', 'Role' => ['passenger']],
 ];
 ?>
 

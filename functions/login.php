@@ -10,7 +10,7 @@ function login()
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $result = $mysql->query("SELECT * FROM User WHERE Username ='$username'");
+    $result = $mysql->query("SELECT * FROM user WHERE Username ='$username'");
     $data = $result->fetch_all(MYSQLI_ASSOC)[0];
 
     if (!$data) {

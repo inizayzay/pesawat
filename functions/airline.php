@@ -32,7 +32,7 @@ function store()
 
     $airlineName = $_POST['airlineName'];
 
-    $sql = "INSERT INTO Airline (AirlineName) VALUES (?)";
+    $sql = "INSERT INTO airline (AirlineName) VALUES (?)";
     $stmt = $mysql->prepare($sql);
     $stmt->bind_param("s", $airlineName);
 

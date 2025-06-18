@@ -93,7 +93,7 @@ function store()
     $MaxPassenger = $_POST['airplanepassenger'];
     $price = $_POST['price'];
 
-    $sql = "INSERT INTO Flight (FlightNumber, DepartureDate, DepartureAirport, ArrivalAirport, DepartureTime, BoardingTime, AirlineID, TerminalGateID, MaxPassenger, price) 
+    $sql = "INSERT INTO flight (FlightNumber, DepartureDate, DepartureAirport, ArrivalAirport, DepartureTime, BoardingTime, AirlineID, TerminalGateID, MaxPassenger, price) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     $stmt = $mysql->prepare($sql);

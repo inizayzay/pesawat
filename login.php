@@ -74,6 +74,10 @@ if (check())
               <button name="login" class="btn btn-primary btn-user btn-block">
                 Login
               </button>
+              <a href="register.php" type="daftar" class="btn btn-secondary btn-user btn-block">
+                Daftar
+              </a>
+
               <!-- <hr> -->
             </form>
             <!-- <hr> -->

@@ -65,7 +65,7 @@ ob_start();
 
     .route {
       text-align: right;
-      font-weight: bold;
+      font-weight: 400;
       margin-bottom: 15px;
     }
 
@@ -104,7 +104,7 @@ ob_start();
 
     <div class="info">
       <h2><?= $ticket['passenger_name'] ?></h2>
-      <div class="route"><?= $ticket['departure_airport_name'] ?> to <?= $ticket['arrival_airport_name'] ?> (<?= $ticket['departure_airport_code'] ?> → <?= $ticket['arrival_airport_code'] ?>)</div>
+      <div class="route"><?= $ticket['departure_airport_name'] ?> to <?= $ticket['arrival_airport_name'] ?> <br> (<?= $ticket['departure_airport_code'] ?> → <?= $ticket['arrival_airport_code'] ?>)</div>
 
       <table>
         <tr>

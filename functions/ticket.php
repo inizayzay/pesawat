@@ -3,6 +3,9 @@
 namespace Ticket;
 
 require_once dirname(__FILE__) . "/../connections/database.php";
+require_once dirname(__FILE__) . "/functions/passenger.php";
+
+use Passenger as Passenger;
 
 function find($id)
 {
@@ -35,7 +38,14 @@ function get()
 {
     global $mysql;
 
-    $stmt = $mysql->prepare("SELECT * FROM ticket ORDER BY TicketID DESC");
+    if ($_SESSION['user']['role'] == 'passenger') {
+        $user = $_SESSION['user'];
+        $passenger = Passenger\getByUserId($user['UserID'])->fetch_assoc();
+        $stmt = $mysql->prepare("SELECT * FROM ticket WHERE PassengerID = ? ORDER BY TicketID DESC");
+        $stmt->bind_param("i", $passenger['PassengerID']);
+    } else {
+        $stmt = $mysql->prepare("SELECT * FROM ticket ORDER BY TicketID DESC");
+    }
     $stmt->execute();
     return $stmt->get_result();
 }

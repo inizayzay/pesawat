@@ -50,7 +50,7 @@ function update()
     $airlineID = (int) $_GET['id'];
     $airlineName = $_POST['airlineName'];
 
-    $sql = "UPDATE Airline 
+    $sql = "UPDATE airline 
     SET AirlineName = ?
     WHERE AirlineID = ?";
 

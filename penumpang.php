@@ -49,7 +49,7 @@ ob_start();
                             <td><?= $passenger['Name']; ?></td>
                             <td><?= $passenger['gender']; ?></td>
                             <td><?= $passenger['BirthDate']; ?></td>
-                            <td><?= $passenger['PlaceOfDate']; ?></td>
+                            <td><?= $passenger['PlaceOfBirth']; ?></td>
                             <td><?= $passenger['ContactEmail']; ?></td>
                             <td><?= $passenger['ContactNumber']; ?></td>
                             <td>

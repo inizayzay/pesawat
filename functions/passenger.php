@@ -24,7 +24,7 @@ function create($data)
     $contactEmail  = $data['contactEmail'];
     $contactNumber = $data['contactNumber'];
 
-    $stmt = $mysql->prepare("INSERT INTO passenger(Name, gender, BirthDate, PlaceOfDate, ContactEmail, ContactNumber) VALUES (?,?,?,?,?,?)");
+    $stmt = $mysql->prepare("INSERT INTO passenger(Name, gender, BirthDate, PlaceOfBirth, ContactEmail, ContactNumber) VALUES (?,?,?,?,?,?)");
     $stmt->bind_param("ssssss", $Fullname, $gender, $birthDate, $placeOfBirth, $contactEmail, $contactNumber);
     return $stmt->get_result();
 }

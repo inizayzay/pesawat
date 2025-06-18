@@ -24,54 +24,69 @@ ob_start();
 ?>
 
 <div class="container">
-  <h2>Search Flight Ticket</h2>
+  <?php
+  if ($_SESSION['user']['Role'] == 'admin') {
+    ?>
 
-  <form>
-    <input type="hidden" name="filter" value="1">
-    <div class="input-group">
-      <div class="input-icon">
-        <!-- <i class="fas fa-plane-departure"></i> -->
-        <select id="dari" name="dari" placeholder="Departure City" required class="select2-departure-airport"></select>
-      </div>
-      <button type="button" class="swap-btn" onclick="tukarLokasi()">
-        <i class="fas fa-exchange-alt"></i>
-      </button>
-      <div class="input-icon">
-        <!-- <i class="fas fa-plane-arrival"></i> -->
-        <select id="tujuan" name="tujuan" placeholder="Destination City" required class="select2-arrival-airport"></select>
-      </div>
-    </div>
+    <h2>Welcome Admin</h2>
+  <?php } else { ?>
 
-    <div class="filter-bar">
-      <div class="filter-btn">
-        <i class="fas fa-plane"></i>
-        <select id="Airline" name="airline">
-          <option value="" disabled selected>-- Pilih Maskapai --</option>
-          <?php while ($airline = $airlines->fetch_assoc()) : ?>
-            <option value="<?= $airline['AirlineID'] ?>"><?= $airline['AirlineName'] ?></option>
-          <?php endwhile; ?>
-        </select>
-      </div>
+    <h2>Search Flight Ticket</h2>
 
-      <div class="filter-btn">
-        <i class="fas fa-tag"></i>
-        <select id="Price" name="price">
-          <option value="">Price</option>
-          <option value=">400">Lebih dari 400</option>
-          <option value="<=400">Kurang atau sama dengan 400</option>
-        </select>
-      </div>
-    </div>
-
-    <button type="submit">Search Ticket</button>
-    <?php if (isset($flights)) : ?>
-      <?php while ($flight = $flights->fetch_assoc()): ?>
-        <div class="result" data-flight='<?= htmlspecialchars(json_encode($flight), ENT_QUOTES, 'UTF-8') ?>' onclick="pilihTiket(this)">
-          <p><strong><?= $flight['airline_name'] ?></strong> • <?= $flight['departure_city'] ?> to <?= $flight['arrival_city'] ?> • <?= $flight['departure_time'] ?> • Rp. <?= number_format($flight['flight_price']) ?></p>
+    <form>
+      <input type="hidden" name="filter" value="1">
+      <div class="input-group">
+        <div class="input-icon">
+          <!-- <i class="fas fa-plane-departure"></i> -->
+          <select id="dari" name="dari" placeholder="Departure City" required class="select2-departure-airport"></select>
         </div>
-      <?php endwhile; ?>
-    <?php endif; ?>
-  </form>
+        <button type="button" class="swap-btn" onclick="tukarLokasi()">
+          <i class="fas fa-exchange-alt"></i>
+        </button>
+        <div class="input-icon">
+          <!-- <i class="fas fa-plane-arrival"></i> -->
+          <select id="tujuan" name="tujuan" placeholder="Destination City" required
+            class="select2-arrival-airport"></select>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="filter-btn">
+          <i class="fas fa-plane"></i>
+          <select id="Airline" name="airline">
+            <option value="" disabled selected>-- Pilih Maskapai --</option>
+            <?php while ($airline = $airlines->fetch_assoc()): ?>
+              <option value="<?= $airline['AirlineID'] ?>"><?= $airline['AirlineName'] ?></option>
+            <?php endwhile; ?>
+          </select>
+        </div>
+
+        <div class="filter-btn">
+          <i class="fas fa-tag"></i>
+          <select id="Price" name="price">
+            <option value="">Price</option>
+            <option value=">400">Lebih dari 400</option>
+            <option value="<=400">Kurang atau sama dengan 400</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit">Search Ticket</button>
+      <?php if (isset($flights)): ?>
+        <?php while ($flight = $flights->fetch_assoc()): ?>
+          <div class="result" data-flight='<?= htmlspecialchars(json_encode($flight), ENT_QUOTES, 'UTF-8') ?>'
+            onclick="pilihTiket(this)">
+            <p><strong><?= $flight['airline_name'] ?></strong> • <?= $flight['departure_city'] ?> to
+              <?= $flight['arrival_city'] ?> • <?= $flight['departure_time'] ?> • Rp.
+              <?= number_format($flight['flight_price']) ?>
+            </p>
+          </div>
+        <?php endwhile; ?>
+      <?php endif; ?>
+    </form>
+    <?php
+  }
+  ?>
 </div>
 
 <!-- Modal -->
@@ -321,7 +336,7 @@ ob_start();
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 <script>
-  $(document).ready(function() {
+  $(document).ready(function () {
     $(".select2-departure-airport, .select2-arrival-airport").select2({
       placeholder: 'Select Airport',
       width: '100%',
@@ -329,14 +344,14 @@ ob_start();
         url: 'api/airport.php',
         dataType: 'json',
         delay: 250,
-        data: function(params) {
+        data: function (params) {
           return {
             name: params.term
           };
         },
-        processResults: function(data) {
+        processResults: function (data) {
           return {
-            results: data.map(function(airport) {
+            results: data.map(function (airport) {
               return {
                 id: airport.IataCode,
                 text: `${airport.AirportName} – ${airport.Municipality} (${airport.IataCode})`
@@ -363,7 +378,7 @@ ob_start();
     $.ajax({
       url: 'api/airport.php?code=' + getQueryParam('dari'),
       dataType: 'json',
-      success: function(data) {
+      success: function (data) {
         const airport = data[0];
         setSelect2Default($('.select2-departure-airport'), airport.IataCode, `${airport.AirportName} – ${airport.Municipality} (${airport.IataCode})`);
       }
@@ -372,7 +387,7 @@ ob_start();
     $.ajax({
       url: 'api/airport.php?code=' + getQueryParam('tujuan'),
       dataType: 'json',
-      success: function(data) {
+      success: function (data) {
         const airport = data[0];
         setSelect2Default($('.select2-arrival-airport'), airport.IataCode, `${airport.AirportName} – ${airport.Municipality} (${airport.IataCode})`);
       }

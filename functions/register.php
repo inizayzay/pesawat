@@ -3,6 +3,8 @@ namespace Register;
 
 require_once dirname(__FILE__) . "/../connections/database.php";
 
+use Exception;
+
 /**
  * Ambil semua data penumpang
  */
@@ -19,14 +21,38 @@ function create($data)
 {
     global $mysql;
 
-    $FullName      = $data['FullName'];
-    $gender        = $data['gender'];
-    $birthDate     = $data['birth_date'];
-    $placeOfBirth  = $data['placeOfBirth'];
-    $contactEmail  = $data['contactEmail'];
-    $contactNumber = $data['contactNumber'];
+    $mysql->begin_transaction();
 
-    $stmt = $mysql->prepare("INSERT INTO passenger(Name, gender, BirthDate, PlaceOfDate, ContactEmail, ContactNumber) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param("ssssss", $Fullname, $gender, $birthDate, $placeOfBirth, $contactEmail, $contactNumber);
-    return $stmt->get_result();
+    try {
+        $fullName = $data['FullName'];
+        $email = $data['contactEmail'];
+        $gender = $data['gender'];
+        $birthDate = $data['birth_date'];
+        $placeOfBirth = $data['placeOfBirth'];
+        $contactNumber = $data['contactNumber'];
+
+        $password = $data['password'];
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $role = 'passenger';
+
+        $stmt = $mysql->prepare("INSERT INTO user (Username, PasswordHash, Role) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $fullName, $hashedPassword, $role);
+        $stmt->execute();
+
+        $userId = $mysql->insert_id;
+
+        $stmt = $mysql->prepare("INSERT INTO passenger (Name, gender, BirthDate, PlaceOfBirth, ContactEmail, ContactNumber, UserID) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssi", $fullName, $gender, $birthDate, $placeOfBirth, $email, $contactNumber, $userId);
+        $stmt->execute();
+
+        $mysql->commit();
+
+        return [
+            'success' => true,
+        ];
+    } catch (Exception $e) {
+        $mysql->rollback();
+        throw $e;
+    }
 }

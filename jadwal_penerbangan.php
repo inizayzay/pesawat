@@ -16,7 +16,7 @@ ob_start();
 ?>
 <!-- Page Heading -->
 <p class="mb-4">
-    The Flight page provides flight data information using the DataTables plugin. This tool allows users to sort, search, and browse flight details easily in a dynamic and interactive table format.
+    The Flight page provides flight data information using the DataTables plugin. This tool allows user to sort, search, and browse flight details easily in a dynamic and interactive table format.
 </p>
 
 <!-- DataTables Example -->

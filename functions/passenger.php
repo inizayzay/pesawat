@@ -59,10 +59,12 @@ function update($data)
     return $stmt->execute();
 }
 
-function delete($id){
+function delete($id)
+{
     global $mysql;
 
-    $stmt = $mysql->prepare("DELETE FROM passenger WHERE PassengerID = ?");
-    $stmt->bind_param("i", $id);
+    $sql = "DELETE FROM passenger WHERE PassengerID = ?";
+    $stmt = $mysql->prepare($sql);
+    $stmt->bind_param('i', $id);
     return $stmt->execute();
 }

@@ -27,7 +27,9 @@ if (check())
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -53,17 +55,38 @@ if (check())
     <div class="col-md-6 col-lg-4">
       <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
-          <!-- Nested Row within Card Body -->
+          <!-- Alert Messages -->
+          <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <?= $_SESSION['success'] ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <?php unset($_SESSION['success']); ?>
+          <?php endif; ?>
+
+          <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <?= $_SESSION['error'] ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <?php unset($_SESSION['error']); ?>
+          <?php endif; ?>
           <div class="p-5">
             <div class="text-center">
               <h1 class="h4 text-white mb-4">Welcome Back!</h1>
             </div>
             <form method="POST" class="user">
               <div class="form-group">
-                <input name="username" type="text" class="form-control form-control-user" id="exampleInputUsername" aria-describedby="UsernameHelp" placeholder="Enter Username Address...">
+                <input name="username" type="text" class="form-control form-control-user" id="exampleInputUsername"
+                  aria-describedby="UsernameHelp" placeholder="Enter Username Address...">
               </div>
               <div class="form-group">
-                <input name="password" type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                <input name="password" type="password" class="form-control form-control-user" id="exampleInputPassword"
+                  placeholder="Password">
               </div>
               <!-- <div class="form-group">
                 <div class="custom-control custom-checkbox small">

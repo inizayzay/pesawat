@@ -10,7 +10,7 @@ if (isset($_POST['create'])) {
     try {
         $result = register\create($_POST);
         if ($result['success']) {
-            $success = 'Registration successful! Your password is: <strong>' . htmlspecialchars($result['generatedPassword']) . '</strong><br>Please save this password as it will not be shown again.';
+            $success = 'Registration successful! Please login to continue.';
             header('refresh:10;url=login.php');
         }
     } catch (Exception $e) {

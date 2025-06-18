@@ -243,11 +243,9 @@ if (check()) {
                                 <div class="col-12 mb-4">
                                     <label for="password" class="form-label">Password</label>
                                     <div class="input-group">
-                                        <span class="input-group-text">+62</span>
-                                        <input type="tel" class="form-control" id="password" name="password"
-                                            placeholder="Your Password" required>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="Enter your password" required>
                                     </div>
-                                    <div class="form-text">Enter your password</div>
                                     <div class="invalid-feedback">
                                         Please provide a strong password.
                                     </div>

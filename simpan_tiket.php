@@ -53,7 +53,8 @@ $stmt = $mysql->prepare("INSERT INTO ticket (RecordLocator, eTicketNumber, SeatN
 $stmt->bind_param("ssssii", $recordLocator, $eTicketNumber, $seatNumber, $boardingZone, $passengerID, $flightID);
 
 if ($stmt->execute()) {
-    echo "Data tiket berhasil disimpan!";
+    $ticketID = $mysql->insert_id;
+    header("/tampilan_tiket.php?id=$ticketID");
 } else {
     echo "Gagal menyimpan data: " . $stmt->error;
 }

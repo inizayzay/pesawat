@@ -7,6 +7,9 @@ function login()
 {
     global $mysql;
 
+    unset($_SESSION["error"]);
+    unset($_SESSION["success"]);
+
     $username = $_POST['username'];
     $password = $_POST['password'];
 

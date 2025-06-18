@@ -13,6 +13,10 @@ $user = $_SESSION['user'];
 $passenger = Passenger\getById($user['UserID'])->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    unset($_SESSION["error"]);
+    unset($_SESSION["success"]);
+    
     $data = [
         'id' => $passenger['PassengerID'],
         'FullName' => $_POST['fullname'],

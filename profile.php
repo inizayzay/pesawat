@@ -12,7 +12,7 @@ if (!check()) {
 
 // Ambil data user yang sedang login
 $user = $_SESSION['user'];
-$passenger = Passenger\getById($user['UserID'])->fetch_assoc();
+$passenger = Passenger\getByUserId($user['UserID'])->fetch_assoc();
 
 ob_start();
 ?>

@@ -68,3 +68,13 @@ function delete($id)
     $stmt->bind_param('i', $id);
     return $stmt->execute();
 }
+
+function getByUserId($id)
+{
+    global $mysql;
+
+    $stmt = $mysql->prepare("SELECT * FROM passenger WHERE UserID = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    return $stmt->get_result();
+}

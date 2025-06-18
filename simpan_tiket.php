@@ -54,7 +54,7 @@ $stmt->bind_param("ssssii", $recordLocator, $eTicketNumber, $seatNumber, $boardi
 
 if ($stmt->execute()) {
     $ticketID = $mysql->insert_id;
-    header("/tampilan_tiket.php?id=$ticketID");
+    header("location: tampilan_tiket.php?id=$ticketID");
 } else {
     echo "Gagal menyimpan data: " . $stmt->error;
 }
